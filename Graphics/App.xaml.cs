@@ -2,11 +2,12 @@
 using System.Data;
 using System.Windows;
 
-namespace _1941;
+namespace Graphics;
 
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
 public partial class App : Application
 {
+
 }
