@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mainWindowViewModel="clr-namespace:UX.ViewModels.MainWindowViewModel"
         xmlns:behaviors="clr-namespace:Library.Behaviors;assembly=Library"
-        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+        xmlns:skia="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance mainWindowViewModel:MainWindowViewModel}"
         behaviors:LoadedBehavior.LoadedCommand="{Binding LoadedCommand}"
@@ -13,7 +13,7 @@
         WindowState="Maximized"
         Background="{StaticResource PrimaryBrush}">
     <Grid>
-        <svgc:SvgViewbox Source="{Binding WorldWaterImagePath}" />
-        <svgc:SvgViewbox Source="{Binding WorldImagePath}" />
+        <skia:SKElement behaviors:PaintSurfaceBehavior.Command="{Binding PaintWaterSurfaceCommand}" />
+        <skia:SKElement behaviors:PaintSurfaceBehavior.Command="{Binding PaintWorldSurfaceCommand}" />
     </Grid>
 </Window>

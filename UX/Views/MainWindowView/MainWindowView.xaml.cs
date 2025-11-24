@@ -1,8 +1,5 @@
-﻿namespace UX.Views.MainWindowView;
+namespace UX.Views.MainWindowView;
 
-/// <summary>
-/// Interaction logic for MainWindow.xaml
-/// </summary>
 public partial class MainWindowView
 {
 
