@@ -5,11 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mainWindowViewModel="clr-namespace:UX.ViewModels.MainWindowViewModel"
         xmlns:behaviors="clr-namespace:Library.Behaviors;assembly=Library"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance mainWindowViewModel:MainWindowViewModel}"
         behaviors:LoadedBehavior.LoadedCommand="{Binding LoadedCommand}"
         Title="1941"
         WindowState="Maximized"
         Background="{StaticResource PrimaryBrush}">
-    <Grid />
+    <Grid>
+        <svgc:SvgViewbox Source="{Binding WorldWaterImagePath}" />
+        <svgc:SvgViewbox Source="{Binding WorldImagePath}" />
+    </Grid>
 </Window>
