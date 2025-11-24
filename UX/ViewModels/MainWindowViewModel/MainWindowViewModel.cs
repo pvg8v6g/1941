@@ -12,6 +12,36 @@ public class MainWindowViewModel : BaseViewModel.BaseViewModel
     private SKSvg? _waterSvg;
     private SKSvg? _worldSvg;
 
+    public int InvalidateRequested
+    {
+        get;
+        private set
+        {
+            field = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public double MapWidth
+    {
+        get;
+        private set
+        {
+            field = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public double MapHeight
+    {
+        get;
+        private set
+        {
+            field = value;
+            OnPropertyChanged();
+        }
+    }
+
     public RelayCommand<SKPaintSurfaceEventArgs> PaintWaterSurfaceCommand => new(PaintWaterSurface);
     public RelayCommand<SKPaintSurfaceEventArgs> PaintWorldSurfaceCommand => new(PaintWorldSurface);
 
@@ -24,15 +54,23 @@ public class MainWindowViewModel : BaseViewModel.BaseViewModel
         _waterSvg.Load(Path.Combine(basePath, "Graphics", "Images", "world_water.svg"));
         _worldSvg = new SKSvg();
         _worldSvg.Load(Path.Combine(basePath, "Graphics", "Images", "world.svg"));
+
+        if (_waterSvg?.Picture is not null)
+        {
+            var scale = 2.5d;
+            MapWidth = _waterSvg.Picture.CullRect.Width * scale;
+            MapHeight = _waterSvg.Picture.CullRect.Height * scale;
+        }
+
+        InvalidateRequested++;
     }
 
     private void PaintWaterSurface(SKPaintSurfaceEventArgs e)
     {
-        Console.WriteLine("here");
         var canvas = e.Surface.Canvas;
         canvas.Clear(SKColors.Transparent);
-        if (_waterSvg?.Picture == null) return;
-        var scale = Math.Min(e.Info.Width / _waterSvg.Picture.CullRect.Width, e.Info.Height / _waterSvg.Picture.CullRect.Height);
+        if (_waterSvg?.Picture is null) return;
+        var scale = 2.5f;
         canvas.Scale(scale);
         canvas.DrawPicture(_waterSvg.Picture);
     }
@@ -41,8 +79,8 @@ public class MainWindowViewModel : BaseViewModel.BaseViewModel
     {
         var canvas = e.Surface.Canvas;
         canvas.Clear(SKColors.Transparent);
-        if (_worldSvg?.Picture == null) return;
-        var scale = Math.Min(e.Info.Width / _worldSvg.Picture.CullRect.Width, e.Info.Height / _worldSvg.Picture.CullRect.Height);
+        if (_worldSvg?.Picture is null) return;
+        var scale = 2.5f;
         canvas.Scale(scale);
         canvas.DrawPicture(_worldSvg.Picture);
     }

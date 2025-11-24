@@ -12,8 +12,16 @@
         Title="1941"
         WindowState="Maximized"
         Background="{StaticResource PrimaryBrush}">
-    <Grid>
-        <skia:SKElement behaviors:PaintSurfaceBehavior.Command="{Binding PaintWaterSurfaceCommand}" />
-        <skia:SKElement behaviors:PaintSurfaceBehavior.Command="{Binding PaintWorldSurfaceCommand}" />
-    </Grid>
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+        <Grid Width="{Binding MapWidth}" Height="{Binding MapHeight}">
+            <skia:SKElement Width="{Binding MapWidth}" Height="{Binding MapHeight}"
+                            behaviors:PaintSurfaceBehavior.Command="{Binding PaintWaterSurfaceCommand}"
+                            behaviors:InvalidateBehavior.Trigger="{Binding}"
+                            behaviors:InvalidateBehavior.PropertyName="InvalidateRequested" />
+            <skia:SKElement Width="{Binding MapWidth}" Height="{Binding MapHeight}"
+                            behaviors:PaintSurfaceBehavior.Command="{Binding PaintWorldSurfaceCommand}"
+                            behaviors:InvalidateBehavior.Trigger="{Binding}"
+                            behaviors:InvalidateBehavior.PropertyName="InvalidateRequested" />
+        </Grid>
+    </ScrollViewer>
 </Window>
