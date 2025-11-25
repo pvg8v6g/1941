@@ -14,13 +14,7 @@
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       </Content>
       <None Remove="Images\world_borders.svg" />
-      <Content Include="Images\world_borders.svg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
       <None Remove="Images\world_water.svg" />
-      <Content Include="Images\world_water.svg">
-        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      </Content>
     </ItemGroup>
 
 </Project>
