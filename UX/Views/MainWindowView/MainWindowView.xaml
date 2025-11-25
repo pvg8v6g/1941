@@ -12,8 +12,25 @@
         Title="1941"
         WindowState="Maximized"
         Background="{StaticResource PrimaryBrush}">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-        <Grid Width="{Binding MapWidth}" Height="{Binding MapHeight}">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
+                  PanningMode="None"
+                  CanContentScroll="False"
+                  ClipToBounds="True"
+                  Background="Transparent"
+                  behaviors:PanZoomBehavior.IsEnabled="True"
+                  behaviors:PanZoomBehavior.TargetElement="{Binding ElementName=MapGrid}">
+        <Grid x:Name="MapGrid"
+              Width="{Binding MapWidth}"
+              Height="{Binding MapHeight}"
+              RenderTransformOrigin="0,0"
+              Background="Transparent">
+            <Grid.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1" ScaleY="1" />
+                    <TranslateTransform X="0" Y="0" />
+                </TransformGroup>
+            </Grid.RenderTransform>
             <skia:SKElement Width="{Binding MapWidth}" Height="{Binding MapHeight}"
                             behaviors:PaintSurfaceBehavior.Command="{Binding PaintWaterSurfaceCommand}"
                             behaviors:InvalidateBehavior.Trigger="{Binding}"

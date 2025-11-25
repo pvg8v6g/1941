@@ -9,9 +9,7 @@ namespace UX.ViewModels.MainWindowViewModel;
 public class MainWindowViewModel : BaseViewModel.BaseViewModel
 {
 
-    private SKSvg? _waterSvg;
-    private SKSvg? _worldSvg;
-    private SKSvg? _bordersSvg;
+    #region Properties
 
     public int InvalidateRequested
     {
@@ -44,8 +42,20 @@ public class MainWindowViewModel : BaseViewModel.BaseViewModel
     }
 
     public RelayCommand<SKPaintSurfaceEventArgs> PaintWaterSurfaceCommand => new(PaintWaterSurface);
+
     public RelayCommand<SKPaintSurfaceEventArgs> PaintWorldSurfaceCommand => new(PaintWorldSurface);
+
     public RelayCommand<SKPaintSurfaceEventArgs> PaintBordersSurfaceCommand => new(PaintBordersSurface);
+
+    #endregion
+
+    #region Fields
+
+    private SKSvg? _waterSvg;
+    private SKSvg? _worldSvg;
+    private SKSvg? _bordersSvg;
+
+    #endregion
 
     #region Actions
 
@@ -82,6 +92,7 @@ public class MainWindowViewModel : BaseViewModel.BaseViewModel
     private void PaintWorldSurface(SKPaintSurfaceEventArgs e)
     {
         var canvas = e.Surface.Canvas;
+
         canvas.Clear(SKColors.Transparent);
         if (_worldSvg?.Picture is null) return;
         var scale = 2.5f;
