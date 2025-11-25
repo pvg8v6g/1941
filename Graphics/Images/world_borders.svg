@@ -27,8 +27,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 -->
-<svg fill="#ececec" height="857" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width=".2" viewBox="0 0 2000 857"
-     width="2000" xmlns="http://www.w3.org/2000/svg">
+<svg fill="none" height="857" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width=".2" viewBox="0 0 2000 857"
+     width="2000" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <defs>
         <clipPath id="bounds">
             <rect x="0" y="0" width="2000" height="857"/>
@@ -1399,5 +1399,12 @@ THE SOFTWARE.
         <circle cx="997.9" cy="189.1" id="0"/>
         <circle cx="673.5" cy="724.1" id="1"/>
         <circle cx="1798.2" cy="719.3" id="2"/>
+    </g>
+    <!-- Borders: two black lines surrounding a red line (black/red/black). -->
+    <g id="borders">
+        <use xlink:href="#group1" href="#group1" stroke="black" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        <use xlink:href="#group1" href="#group1" stroke="#7a1212" stroke-width="0.5" fill="none" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        <use xlink:href="#group2" href="#group2" stroke="black" stroke-width="2" fill="none" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
+        <use xlink:href="#group2" href="#group2" stroke="#7a1212" stroke-width="0.5" fill="none" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>
     </g>
 </svg>

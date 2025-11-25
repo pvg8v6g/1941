@@ -11,6 +11,7 @@ public class MainWindowViewModel : BaseViewModel.BaseViewModel
 
     private SKSvg? _waterSvg;
     private SKSvg? _worldSvg;
+    private SKSvg? _bordersSvg;
 
     public int InvalidateRequested
     {
@@ -44,6 +45,7 @@ public class MainWindowViewModel : BaseViewModel.BaseViewModel
 
     public RelayCommand<SKPaintSurfaceEventArgs> PaintWaterSurfaceCommand => new(PaintWaterSurface);
     public RelayCommand<SKPaintSurfaceEventArgs> PaintWorldSurfaceCommand => new(PaintWorldSurface);
+    public RelayCommand<SKPaintSurfaceEventArgs> PaintBordersSurfaceCommand => new(PaintBordersSurface);
 
     #region Actions
 
@@ -54,6 +56,8 @@ public class MainWindowViewModel : BaseViewModel.BaseViewModel
         _waterSvg.Load(Path.Combine(basePath, "Graphics", "Images", "world_water.svg"));
         _worldSvg = new SKSvg();
         _worldSvg.Load(Path.Combine(basePath, "Graphics", "Images", "world.svg"));
+        _bordersSvg = new SKSvg();
+        _bordersSvg.Load(Path.Combine(basePath, "Graphics", "Images", "world_borders.svg"));
 
         if (_waterSvg?.Picture is not null)
         {
@@ -83,6 +87,16 @@ public class MainWindowViewModel : BaseViewModel.BaseViewModel
         var scale = 2.5f;
         canvas.Scale(scale);
         canvas.DrawPicture(_worldSvg.Picture);
+    }
+
+    private void PaintBordersSurface(SKPaintSurfaceEventArgs e)
+    {
+        var canvas = e.Surface.Canvas;
+        canvas.Clear(SKColors.Transparent);
+        if (_bordersSvg?.Picture is null) return;
+        var scale = 2.5f;
+        canvas.Scale(scale);
+        canvas.DrawPicture(_bordersSvg.Picture);
     }
 
     #endregion
