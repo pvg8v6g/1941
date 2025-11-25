@@ -51,7 +51,7 @@ public class MainWindowViewModel : BaseViewModel.BaseViewModel
     {
         var basePath = AppDomain.CurrentDomain.BaseDirectory;
         _waterSvg = new SKSvg();
-        _waterSvg.Load(Path.Combine(basePath, "Graphics", "Images", "world_water.svg"));
+        _waterSvg.Load(Path.Combine(basePath, "Graphics", "Images", "new_world_water.svg"));
         _worldSvg = new SKSvg();
         _worldSvg.Load(Path.Combine(basePath, "Graphics", "Images", "world.svg"));
 
