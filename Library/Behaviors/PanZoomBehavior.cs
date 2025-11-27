@@ -50,6 +50,7 @@ public static class PanZoomBehavior
         public TranslateTransform? TranslateTransform;
         public FrameworkElement? Target; // element that actually gets transformed
         public bool SubscribedToTargetSize;
+        public Cursor? OriginalCursor; // cursor to restore when exiting interaction
     }
 
     private static readonly Dictionary<FrameworkElement, State> States = new();
@@ -89,10 +90,7 @@ public static class PanZoomBehavior
                 // Ensure we release capture and restore cursor if we were panning
                 // when the behavior is disabled.
                 Mouse.Capture(null);
-                if (Mouse.OverrideCursor == Cursors.Hand)
-                {
-                    Mouse.OverrideCursor = null;
-                }
+                Mouse.OverrideCursor = null;
                 element.Loaded -= OnElementLoaded;
                 element.Unloaded -= OnElementUnloaded;
 
@@ -293,6 +291,12 @@ public static class PanZoomBehavior
         if (e.Key == Key.Space)
         {
             state.IsSpaceDown = true;
+            // On Space pressed, show OPEN hand cursor if not currently panning
+            if (!state.IsPanning)
+            {
+                state.OriginalCursor ??= Mouse.OverrideCursor; // remember the current override (may be null)
+                Mouse.OverrideCursor = Cursors.ScrollAll; // OPEN hand substitute
+            }
             e.Handled = true;
         }
     }
@@ -307,12 +311,11 @@ public static class PanZoomBehavior
             {
                 state.IsPanning = false;
                 Mouse.Capture(null);
-                // Restore cursor when exiting pan via Space key release
-                if (Mouse.OverrideCursor == Cursors.Hand)
-                {
-                    Mouse.OverrideCursor = null;
-                }
+                // On Space release while panning, end panning and restore original cursor
             }
+            // Restore original cursor on Space release
+            Mouse.OverrideCursor = state.OriginalCursor;
+            state.OriginalCursor = null;
             e.Handled = true;
         }
     }
@@ -330,8 +333,9 @@ public static class PanZoomBehavior
             // panning speed is consistent regardless of current zoom level.
             state.LastMouse = e.GetPosition(element);
             Mouse.Capture(element); // capture on attached element (e.g., Window)
-            // Change cursor to hand while panning
-            Mouse.OverrideCursor = Cursors.Hand;
+            // Change cursor to grasping hand while panning (substitute)
+            state.OriginalCursor ??= Mouse.OverrideCursor; // remember if not already stored
+            Mouse.OverrideCursor = Cursors.SizeAll; // GRASPING hand substitute
             e.Handled = true;
         }
     }
@@ -365,10 +369,15 @@ public static class PanZoomBehavior
         {
             state.IsPanning = false;
             Mouse.Capture(null);
-            // Restore cursor when panning ends
-            if (Mouse.OverrideCursor == Cursors.Hand)
+            // On mouse release: if Space still held, switch back to OPEN hand, else restore original
+            if (state.IsSpaceDown || Keyboard.IsKeyDown(Key.Space))
             {
-                Mouse.OverrideCursor = null;
+                Mouse.OverrideCursor = Cursors.ScrollAll; // OPEN hand substitute
+            }
+            else
+            {
+                Mouse.OverrideCursor = state.OriginalCursor;
+                state.OriginalCursor = null;
             }
             e.Handled = true;
         }

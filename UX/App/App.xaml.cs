@@ -1,7 +1,11 @@
 ﻿using System.Windows;
-using System.Windows.Navigation;
 using Microsoft.Extensions.DependencyInjection;
+using Library.Services;
+using UX.Services;
+using UX.ViewModels.BaseViewModel;
+using UX.ViewModels.GameViewModel;
 using UX.ViewModels.MainWindowViewModel;
+using UX.Views.GameView;
 using UX.Views.MainWindowView;
 
 namespace UX.App;
@@ -35,23 +39,27 @@ public partial class App : Application
         #region Register View Models
 
         services.AddSingleton<MainWindowViewModel>();
+        services.AddSingleton<GameViewModel>();
 
         #endregion
 
         #region Assign View Models
 
         services.AddSingleton<MainWindowView>(provider => new MainWindowView { DataContext = provider.GetRequiredService<MainWindowViewModel>() });
+        services.AddSingleton<GameView>(provider => new GameView { DataContext = provider.GetRequiredService<GameViewModel>() });
 
         #endregion
 
-        // #region Register Services
-        //
-        // services.AddSingleton<Func<Type, BaseViewModel>>(provider => viewModelType => (BaseViewModel) provider.GetRequiredService(viewModelType));
+        #region Register Services
+
+        services.AddSingleton<ISvgClassColorService, SvgClassColorService>();
+
+        services.AddSingleton<Func<Type, BaseViewModel>>(provider => viewModelType => (BaseViewModel) provider.GetRequiredService(viewModelType));
         // services.AddSingleton<Func<Type, EngineTask>>(provider => taskType => (EngineTask) provider.GetRequiredService(taskType));
         // services.AddSingleton<IJsonService, JsonService>();
         // services.AddSingleton<IDataService, DataService>();
         // services.AddSingleton<IConfigurationService, ConfigurationService>();
-        // services.AddSingleton<INavigationService, NavigationService>();
+        services.AddSingleton<INavigationService, NavigationService>();
         // services.AddSingleton<ILocationService, LocationService>();
         // services.AddSingleton<IGraphicsService, GraphicsService>();
         // services.AddSingleton<IIniDataService, IniDataService>();
@@ -65,8 +73,9 @@ public partial class App : Application
         // services.AddSingleton<CommandSetService<CommandSet>>();
         // services.AddSingleton<CommandButtonService<CommandButton>>();
         // services.AddSingleton<ObjectCreationService<ObjectCreationList>>();
-        //
-        // #endregion
+
+        #endregion
+
         //
         // #region Register Tasks
         //
