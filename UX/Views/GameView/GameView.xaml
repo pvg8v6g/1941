@@ -28,18 +28,32 @@
                     <TranslateTransform X="0" Y="0" />
                 </TransformGroup>
             </Grid.RenderTransform>
-            <wpf:SKElement Width="{Binding MapWidth}" Height="{Binding MapHeight}"
+            <wpf:SKElement Width="{Binding MapWidth}"
+                           Height="{Binding MapHeight}"
                            behaviors:PaintSurfaceBehavior.Command="{Binding PaintWaterSurfaceCommand}"
                            behaviors:InvalidateBehavior.Trigger="{Binding}"
-                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested" />
-            <wpf:SKElement Width="{Binding MapWidth}" Height="{Binding MapHeight}"
+                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                           IsHitTestVisible="False" />
+            <wpf:SKElement Width="{Binding MapWidth}"
+                           Height="{Binding MapHeight}"
                            behaviors:PaintSurfaceBehavior.Command="{Binding PaintWorldSurfaceCommand}"
                            behaviors:InvalidateBehavior.Trigger="{Binding}"
-                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested" />
-            <wpf:SKElement Width="{Binding MapWidth}" Height="{Binding MapHeight}"
+                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                           IsHitTestVisible="True"
+                           behaviors:MouseMoveBehavior.Command="{Binding MouseMoveCommand}"
+                           behaviors:MouseLeaveBehavior.Command="{Binding MouseLeaveCommand}" />
+            <wpf:SKElement Width="{Binding MapWidth}"
+                           Height="{Binding MapHeight}"
                            behaviors:PaintSurfaceBehavior.Command="{Binding PaintBordersSurfaceCommand}"
                            behaviors:InvalidateBehavior.Trigger="{Binding}"
-                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested" />
+                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                           IsHitTestVisible="False" />
+            <wpf:SKElement Width="{Binding MapWidth}"
+                           Height="{Binding MapHeight}"
+                           behaviors:PaintSurfaceBehavior.Command="{Binding PaintLabelsSurfaceCommand}"
+                           behaviors:InvalidateBehavior.Trigger="{Binding}"
+                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                           IsHitTestVisible="False" />
         </Grid>
     </ScrollViewer>
 </UserControl>

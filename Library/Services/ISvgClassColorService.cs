@@ -14,4 +14,16 @@ public interface ISvgClassColorService
     /// <param name="color">Color to apply to fill.</param>
     /// <returns>Modified SVG xml.</returns>
     string UpsertClassFill(string svgXml, string className, SKColor color);
+
+    /// <summary>
+    /// Extracts all distinct class tokens that appear in attributes like class="a b c".
+    /// </summary>
+    ISet<string> ExtractClasses(string svgXml);
+
+    /// <summary>
+    /// Returns a new SVG xml with a <style> block that sets fills for provided classes.
+    /// The dictionary maps class name (without dot) to fill color. Optionally lightens
+    /// the fill of <paramref name="hoveredClass"/> for hover effect.
+    /// </summary>
+    string ApplyClassFills(string svgXml, IReadOnlyDictionary<string, SKColor> fills, string? hoveredClass = null, float hoverLighten = 0.18f);
 }
