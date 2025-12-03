@@ -27,7 +27,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 -->
-<svg fill="#ececec" height="857" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width=".2" viewBox="0 0 2000 857"
+<svg fill="#ececec" height="857" stroke="green" stroke-linecap="round" stroke-linejoin="round" stroke-width=".2" viewBox="0 0 2000 857"
      width="2000" xmlns="http://www.w3.org/2000/svg">
     <defs>
         <clipPath id="bounds">
@@ -159,7 +159,6 @@ THE SOFTWARE.
     <text x="687.2" y="649.2">Namibia</text>
     <text x="916.8" y="288.4">Nepal</text>
     <text x="591.4" y="168.4">Netherlands</text>
-    <text x="1489.6" y="638.2">New</text>
     <text x="86" y="419">Nicaragua</text>
     <text x="611.4" y="388.6">Niger</text>
     <text x="614.8" y="443.6">Nigeria</text>
@@ -229,6 +228,6 @@ THE SOFTWARE.
     <text x="495.2" y="344.8">Western</text>
     <text x="834.6" y="400.2">Yemen</text>
     <text x="722" y="585.6">Zambia</text>
-    <text x="1457.8" y="761.6">Zealand</text>
+    <text x="1457.8" y="761.6">New Zealand</text>
     <text x="728.8" y="622.8">Zimbabwe</text>
 </svg>
