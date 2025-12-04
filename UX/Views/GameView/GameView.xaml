@@ -17,7 +17,7 @@
                   Background="Transparent"
                   behaviors:PanZoomScrollBehavior.IsEnabled="True"
                   behaviors:PanZoomScrollBehavior.TargetElement="{Binding ElementName=MapGrid}"
-                  behaviors:PanZoomScrollBehavior.EdgeHideMargin="16,16,16,16">
+                  behaviors:PanZoomScrollBehavior.EdgeHideMargin="0,0,0,0">
         <Grid x:Name="MapGrid"
               Width="{Binding MapWidth}"
               Height="{Binding MapHeight}"

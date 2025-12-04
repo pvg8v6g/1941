@@ -306,8 +306,8 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
 
         if (svg.Picture is null) return;
 
-        var width = (int) Math.Ceiling((svg.Picture.CullRect.Width + 5) * DrawScale);
-        var height = (int) Math.Ceiling((svg.Picture.CullRect.Height + 5) * DrawScale);
+        var width = (int) Math.Ceiling((svg.Picture.CullRect.Width) * DrawScale);
+        var height = (int) Math.Ceiling((svg.Picture.CullRect.Height) * DrawScale);
 
         _hitmapBitmap?.Dispose();
         _hitmapBitmap = new SKBitmap(width, height, true);
@@ -328,8 +328,8 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
 
         if (_waterSvg?.Picture is null) return;
         var scale = 2.5d;
-        MapWidth = (_waterSvg.Picture.CullRect.Width + 5) * scale;
-        MapHeight = (_waterSvg.Picture.CullRect.Height + 5) * scale;
+        MapWidth = (_waterSvg.Picture.CullRect.Width) * scale;
+        MapHeight = (_waterSvg.Picture.CullRect.Height) * scale;
     }
 
     private void LoadWorld(string basePath)

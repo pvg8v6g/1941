@@ -27,207 +27,56 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 -->
-<svg fill="#ececec" height="857" stroke="green" stroke-linecap="round" stroke-linejoin="round" stroke-width=".2" viewBox="0 0 2000 857"
-     width="2000" xmlns="http://www.w3.org/2000/svg">
+<svg fill="none" height="857" viewBox="0 0 2000 857" width="2000" xmlns="http://www.w3.org/2000/svg">
     <defs>
+        <style><![CDATA[
+            /* Center all labels on their x/y anchor point */
+            text {
+                text-anchor: middle;
+                dominant-baseline: middle;
+                fill: #ffffff;
+                stroke: #000000;
+                stroke-width: 1;
+                font-family: Segoe UI, Arial, sans-serif;
+                font-size: 16px;
+            }
+        ]]></style>
         <clipPath id="bounds">
             <rect x="0" y="0" width="2000" height="857"/>
         </clipPath>
     </defs>
 
-    <text x="927.8" y="284">Afghanistan</text>
-    <text x="670.8" y="237.8">Albania</text>
-    <text x="575.4" y="321.2">Algeria</text>
-    <text x="901.6" y="303.6">American</text>
-    <text x="666.4" y="573.6">Angola</text>
-    <text x="934" y="260.4">Anguilla</text>
-    <text x="553.2" y="295.6">Antigua</text>
-    <text x="428.4" y="543.4">Argentina</text>
-    <text x="528.6" y="544.4">Armenia</text>
-    <text x="1050" y="675.8">Australia</text>
-    <text x="637.6" y="367.6">Austria</text>
-    <text x="814.4" y="244.6">Azerbaijan</text>
-    <text x="147.2" y="348.6">Bahamas</text>
-    <text x="844.2" y="334.2">Bahrain</text>
-    <text x="854.8" y="284.6">Bangladesh</text>
-    <text x="231" y="416.8">Barbados</text>
-    <text x="512.6" y="315">Barbuda</text>
-    <text x="746.2" y="191">Belarus</text>
-    <text x="587.4" y="178.8">Belgium</text>
-    <text x="70" y="391.2">Belize</text>
-    <text x="631.4" y="342.2">Benin</text>
-    <text x="826" y="253.2">Bhutan</text>
-    <text x="619" y="484.8">Bolivia</text>
-    <text x="873.8" y="500.2">Botswana</text>
-    <text x="258.8" y="593">Brazil</text>
-    <text x="1070" y="329.2">British</text>
-    <text x="739.6" y="477.8">Brunei</text>
-    <text x="873.4" y="274">Bulgaria</text>
-    <text x="900.8" y="429.6">Burundi</text>
-    <text x="1156.8" y="421.2">Cambodia</text>
-    <text x="405.2" y="258.2">Cameroon</text>
-    <text x="1002.4" y="117.2">Canada</text>
-    <text x="200" y="476">Central</text>
-    <text x="671.2" y="402.6">Chad</text>
-    <text x="211" y="735.2">Chile</text>
-    <text x="1097.2" y="272.6">China</text>
-    <text x="152.6" y="475.4">Colombia</text>
-    <text x="892.4" y="398.4">Comoros</text>
-    <text x="1182.2" y="177.6">Costa</text>
-    <text x="701.8" y="360.2">Croatia</text>
-    <text x="619.4" y="311.8">Cuba</text>
-    <text x="178" y="423.6">Curaçao</text>
-    <text x="743.4" y="277.6">Cyprus</text>
-    <text x="534.6" y="454">Côte</text>
-    <text x="549.2" y="454.6">d&apos;Ivoire</text>
-    <text x="615" y="143.4">Denmark</text>
-    <text x="805.4" y="425.8">Djibouti</text>
-    <text x="221.8" y="402.6">Dominica</text>
-    <text x="123.4" y="513">Ecuador</text>
-    <text x="735.6" y="329.6">Egypt</text>
-    <text x="789.2" y="404">Eritrea</text>
-    <text x="683.4" y="130">Estonia</text>
-    <text x="794.2" y="442.8">Ethiopia</text>
-    <text x="556.8" y="422.4">Faso</text>
-    <text x="820.4" y="446">Federated</text>
-    <text x="1565.4" y="614.8">Fiji</text>
-    <text x="678.2" y="93">Finland</text>
-    <text x="579.4" y="205.4">France</text>
-    <text x="660" y="298.8">Gabon</text>
-    <text x="479.8" y="414.8">Gambia</text>
-    <text x="789.6" y="230.2">Georgia</text>
-    <text x="617.2" y="174.8">Germany</text>
-    <text x="560" y="450.8">Ghana</text>
-    <text x="689" y="255.6">Greece</text>
-    <text x="411.6" y="61">Greenland</text>
-    <text x="218.8" y="423.8">Grenada</text>
-    <text x="221.6" y="397.8">Guadeloupe</text>
-    <text x="1380.4" y="415">Guam</text>
-    <text x="59.6" y="400.2">Guatemala</text>
-    <text x="265.4" y="476.6">Guiana</text>
-    <text x="344.2" y="445.2">Guinea</text>
-    <text x="490.4" y="425.4">Guinea-Bissau</text>
-    <text x="360.2" y="457.8">Guyana</text>
-    <text x="335" y="403.2">Haiti</text>
-    <text x="656.4" y="219.8">Herzegovina</text>
-    <text x="81.6" y="408.6">Honduras</text>
-    <text x="663.6" y="199.4">Hungary</text>
-    <text x="484.8" y="92.4">Iceland</text>
-    <text x="1021.6" y="362.2">India</text>
-    <text x="1235.4" y="517.2">Indonesia</text>
-    <text x="578.6" y="366.8">Iran</text>
-    <text x="861.8" y="295.4">Iraq</text>
-    <text x="527.6" y="161.2">Ireland</text>
-    <text x="324.8" y="471.4">Islands</text>
-    <text x="755.6" y="299.8">Israel</text>
-    <text x="631.4" y="233.2">Italy</text>
-    <text x="134.4" y="385.4">Jamaica</text>
-    <text x="1289.4" y="256.2">Japan</text>
-    <text x="767" y="300.8">Jordan</text>
-    <text x="897.8" y="194.8">Kazakhstan</text>
-    <text x="780.8" y="498.8">Kenya</text>
-    <text x="859.6" y="176.8">Kitts</text>
-    <text x="1053.8" y="235.2">Korea</text>
-    <text x="782.6" y="351.6">Kosovo</text>
-    <text x="825.6" y="313.6">Kuwait</text>
-    <text x="955" y="236.8">Kyrgyzstan</text>
-    <text x="681.2" y="140.2">Latvia</text>
-    <text x="844.2" y="259.6">Lebanon</text>
-    <text x="719.8" y="692">Lesotho</text>
-    <text x="512.6" y="460.2">Liberia</text>
-    <text x="661.4" y="332.4">Libya</text>
-    <text x="678.6" y="150.4">Lithuania</text>
-    <text x="595.6" y="183.2">Luxembourg</text>
-    <text x="678.8" y="234.8">Macedonia</text>
-    <text x="827.8" y="622.6">Madagascar</text>
-    <text x="758.4" y="585.2">Malawi</text>
-    <text x="1186.6" y="477">Malaysia</text>
-    <text x="543.8" y="388.8">Mali</text>
-    <text x="643" y="271.2">Malta</text>
-    <text x="223.4" y="407.4">Martinique</text>
-    <text x="504.6" y="366.8">Mauritania</text>
-    <text x="886.6" y="631.6">Mauritius</text>
-    <text x="820.4" y="583.6">Mayotte</text>
-    <text x="1002.4" y="349.8">Mexico</text>
-    <text x="514.4" y="335.6">Micronesia</text>
-    <text x="619.6" y="414.6">Moldova</text>
-    <text x="982.6" y="240.2">Mongolia</text>
-    <text x="854.4" y="204">Montenegro</text>
-    <text x="586.4" y="277.8">Morocco</text>
-    <text x="765.4" y="620.8">Mozambique</text>
-    <text x="1103.6" y="378.4">Myanmar</text>
-    <text x="687.2" y="649.2">Namibia</text>
-    <text x="916.8" y="288.4">Nepal</text>
-    <text x="591.4" y="168.4">Netherlands</text>
-    <text x="86" y="419">Nicaragua</text>
-    <text x="611.4" y="388.6">Niger</text>
-    <text x="614.8" y="443.6">Nigeria</text>
-    <text x="640.8" y="72.4">Norway</text>
-    <text x="877.2" y="363.6">Oman</text>
-    <text x="939.8" y="306.4">Pakistan</text>
-    <text x="756.8" y="296.6">Palestine</text>
-    <text x="113.4" y="447.6">Panama</text>
-    <text x="1405.8" y="543.8">Papua</text>
-    <text x="242.4" y="652">Paraguay</text>
-    <text x="1146.4" y="385">PDR</text>
-    <text x="142.6" y="560.6">Peru</text>
-    <text x="1216.4" y="424.2">Philippines</text>
-    <text x="658.6" y="169.8">Poland</text>
-    <text x="1755.6" y="587.2">Polynesia</text>
-    <text x="524.4" y="247.8">Portugal</text>
-    <text x="848.2" y="339">Qatar</text>
-    <text x="710.6" y="354.6">Republic</text>
-    <text x="824.8" y="330">Reunion</text>
-    <text x="509.8" y="234">Rica</text>
-    <text x="661" y="211.8">Rico</text>
-    <text x="891.2" y="120.2">Romania</text>
-    <text x="1009.4" y="123.8">Russian</text>
-    <text x="735.8" y="514.8">Rwanda</text>
-    <text x="223.4" y="412.2">Saint</text>
-    <text x="66.2" y="413.2">Salvador</text>
-    <text x="815.6" y="345.8">Saudi</text>
-    <text x="484.6" y="408.8">Senegal</text>
-    <text x="672.8" y="218">Serbia</text>
-    <text x="499.4" y="447.6">Sierra</text>
-    <text x="663.8" y="190.2">Slovakia</text>
-    <text x="453.4" y="339.2">Slovenia</text>
-    <text x="882.4" y="530.6">Solomon</text>
-    <text x="826.4" y="468.2">Somalia</text>
-    <text x="701" y="684.4">South</text>
-    <text x="550" y="246">Spain</text>
-    <text x="643.8" y="459.2">Sri</text>
-    <text x="1037" y="330.8">States</text>
-    <text x="735" y="419.6">Sudan</text>
-    <text x="482" y="519.6">Suriname</text>
-    <text x="738.6" y="671.6">Swaziland</text>
-    <text x="642.2" y="109.2">Sweden</text>
-    <text x="667.4" y="375.2">Switzerland</text>
-    <text x="773.8" y="278.4">Syria</text>
-    <text x="1234.8" y="349.6">Taiwan</text>
-    <text x="941.4" y="252.2">Tajikistan</text>
-    <text x="763.6" y="542.4">Tanzania</text>
-    <text x="910.2" y="440.2">Thailand</text>
-    <text x="689" y="527.4">the</text>
-    <text x="1278.8" y="558.2">Timor-Leste</text>
-    <text x="571.4" y="447.2">Togo</text>
-    <text x="603.6" y="500.2">Tomé</text>
-    <text x="220.2" y="434.6">Trinidad</text>
-    <text x="617.2" y="284.4">Tunisia</text>
-    <text x="752.4" y="251.2">Turkey</text>
-    <text x="878" y="251.4">Turkmenistan</text>
-    <text x="749.2" y="492.6">Uganda</text>
-    <text x="720.4" y="192.4">Ukraine</text>
-    <text x="1002.4" y="218.8">United</text>
-    <text x="265.8" y="710.4">Uruguay</text>
-    <text x="898.2" y="236.4">Uzbekistan</text>
-    <text x="1506.4" y="610.6">Vanuatu</text>
-    <text x="190.4" y="460.6">Venezuela</text>
-    <text x="431.8" y="398.8">Verde</text>
-    <text x="1157.2" y="399">Vietnam</text>
-    <text x="221.8" y="416.4">Vincent</text>
-    <text x="495.2" y="344.8">Western</text>
-    <text x="834.6" y="400.2">Yemen</text>
-    <text x="722" y="585.6">Zambia</text>
-    <text x="1457.8" y="761.6">New Zealand</text>
-    <text x="728.8" y="622.8">Zimbabwe</text>
+    <!-- Europe — 1941 English names. Coordinates set individually (no group transform). -->
+    <g id="labels-europe" pointer-events="none" clip-path="url(#bounds)">
+        <!-- Generated by Tools/LabelGen -->
+        <text x="969" y="157"><tspan x="969" dy="-0.6em">United</tspan><tspan x="969" dy="1.2em">Kingdom</tspan></text>
+        <text x="74" y="12">Ireland</text>
+        <text x="1007" y="205">France</text>
+        <text x="19" y="4">Spain</text>
+        <text x="29" y="8">Portugal</text>
+        <text x="68" y="12">Belgium</text>
+        <text x="60" y="22">Netherlands</text>
+        <text x="145" y="26">Luxembourg</text>
+        <text x="18" y="3">Germany</text>
+        <text x="43" y="8">Switzerland</text>
+        <text x="29" y="5">Austria</text>
+        <text x="1051" y="232">Italy</text>
+        <text x="1034" y="145">Denmark</text>
+        <text x="1059" y="58">Norway</text>
+        <text x="27" y="2">Sweden</text>
+        <text x="29" y="2">Finland</text>
+        <text x="24" y="3">Poland</text>
+        <text x="33" y="6">Czechoslovakia</text>
+        <text x="35" y="6">Hungary</text>
+        <text x="25" y="4">Romania</text>
+        <text x="40" y="8">Bulgaria</text>
+        <text x="49" y="10">Albania</text>
+        <text x="1110" y="252">Greece</text>
+        <text x="66" y="7">Estonia</text>
+        <text x="51" y="6">Latvia</text>
+        <text x="58" y="8">Lithuania</text>
+        <text x="1168" y="251">Turkey</text>
+        <text x="1392" y="116">Soviet Union</text>
+    </g>
+
 </svg>
