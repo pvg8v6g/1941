@@ -1,8 +1,14 @@
 ﻿namespace Library.Models;
 
-public class BaseUnit
+public abstract class BaseUnit
 {
 
-    public string Name { get; init; } = string.Empty;
+    public abstract required string Name { get; init; }
+
+    public abstract required int Cost { get; init; }
+
+    public abstract required int Move { get; init; }
+
+    public abstract required int TransportCost { get; init; }
 
 }

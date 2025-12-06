@@ -212,69 +212,63 @@ THE SOFTWARE.
     <!-- Americas — 1941 English names; island chains grouped; labels centered on countries. -->
     <g id="labels-americas" pointer-events="none" clip-path="url(#bounds)">
         <!-- North America -->
-        <!-- Split Canada and United States and Mexico into West/East labels for better coverage -->
-        <text x="220" y="180">Canada</text>
-        <text x="420" y="180">Canada</text>
+        <!-- Split labels as requested -->
+        <text x="120" y="180">Western Canada</text>
+        <text x="260" y="180">Eastern Canada</text>
 
-        <text x="230" y="240">
-            <tspan x="230" dy="-0.6em">United</tspan>
-            <tspan x="230" dy="1.2em">States</tspan>
-        </text>
-        <text x="380" y="240">
-            <tspan x="380" dy="-0.6em">United</tspan>
-            <tspan x="380" dy="1.2em">States</tspan>
-        </text>
+        <text x="80" y="240">Western United States</text>
+        <text x="200" y="240">Eastern United States</text>
 
-        <text x="340" y="330">Mexico</text>
-        <text x="470" y="330">Mexico</text>
+        <text x="80" y="330">Western Mexico</text>
+        <text x="140" y="330">Eastern Mexico</text>
 
         <text x="500" y="120">Greenland</text>
-        <text x="637" y="294">Bermuda</text>
+        <text x="217" y="294">Bermuda</text>
 
-        <!-- Central America (aligned to world.svg geometry) -->
-        <text x="488" y="390">Guatemala</text>
-        <text x="488" y="404">Belize</text>
-        <text x="514" y="427">El Salvador</text>
-        <text x="519" y="415">Honduras</text>
-        <text x="520" y="405">Nicaragua</text>
-        <text x="516" y="445">Costa Rica</text>
-        <text x="550" y="450">Panama</text>
+        <!-- Central America (rolled back) -->
+        <text x="68" y="390">Guatemala</text>
+        <text x="68" y="404">Belize</text>
+        <text x="94" y="427">El Salvador</text>
+        <text x="99" y="415">Honduras</text>
+        <text x="100" y="405">Nicaragua</text>
+        <text x="96" y="445">Costa Rica</text>
+        <text x="130" y="450">Panama</text>
 
-        <!-- Caribbean (place near densest island clusters; aligned to world.svg positions) -->
-        <text x="545" y="360">Cuba</text>
-        <text x="556" y="387">Jamaica</text>
-        <text x="586" y="374">Haiti</text>
-        <text x="595" y="386">Dominican Republic</text>
-        <text x="610" y="385">Puerto Rico</text>
-        <text x="560" y="350">Bahamas</text>
-        <text x="645" y="430">
-            <tspan x="645" dy="-0.6em">Trinidad &amp;</tspan>
-            <tspan x="645" dy="1.2em">Tobago</tspan>
+        <!-- Caribbean (rolled back to prior coordinates) -->
+        <text x="-295" y="360">Cuba</text>
+        <text x="-284" y="387">Jamaica</text>
+        <text x="-254" y="374">Haiti</text>
+        <text x="-248" y="386">Dominican Republic</text>
+        <text x="-223" y="385">Puerto Rico</text>
+        <text x="-265" y="350">Bahamas</text>
+        <text x="-195" y="430">
+            <tspan x="-195" dy="-0.6em">Trinidad &amp;</tspan>
+            <tspan x="-195" dy="1.2em">Tobago</tspan>
         </text>
 
-        <!-- The Guianas -->
-        <text x="680" y="487">French Guiana</text>
-        <text x="663" y="475">Guyana</text>
-        <text x="681" y="465">Suriname</text>
+        <!-- The Guianas (rolled back) -->
+        <text x="-163" y="487">French Guiana</text>
+        <text x="-178" y="475">Guyana</text>
+        <text x="-159" y="465">Suriname</text>
 
-        <!-- South America north/west -->
-        <text x="650" y="465">Venezuela</text>
-        <text x="600" y="465">Colombia</text>
-        <text x="560" y="515">Ecuador</text>
-        <text x="600" y="560">Peru</text>
-        <text x="640" y="540">Bolivia</text>
+        <!-- South America north/west (rolled back) -->
+        <text x="-185" y="465">Venezuela</text>
+        <text x="-252" y="465">Colombia</text>
+        <text x="-280" y="515">Ecuador</text>
+        <text x="-250" y="560">Peru</text>
+        <text x="-180" y="540">Bolivia</text>
 
-        <!-- Southern Cone -->
-        <text x="660" y="720">Argentina</text>
-        <text x="615" y="740">Chile</text>
-        <text x="700" y="720">Uruguay</text>
-        <text x="660" y="650">Paraguay</text>
+        <!-- Southern Cone (rolled back) -->
+        <text x="-180" y="720">Argentina</text>
+        <text x="-215" y="740">Chile</text>
+        <text x="-140" y="720">Uruguay</text>
+        <text x="-170" y="650">Paraguay</text>
 
-        <!-- Brazil (centered roughly on interior) -->
-        <text x="700" y="600">Brazil</text>
+        <!-- Brazil (rolled back) -->
+        <text x="-170" y="600">Brazil</text>
 
-        <!-- South Atlantic islands -->
-        <text x="690" y="835">Falkland Islands</text>
+        <!-- South Atlantic islands (rolled back) -->
+        <text x="-145" y="835">Falkland Islands</text>
     </g>
 
 </svg>

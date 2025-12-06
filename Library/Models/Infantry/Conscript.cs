@@ -3,6 +3,12 @@
 public class Conscript : BaseUnit
 {
 
-    public string Name = "Conscript";
+    public override required string Name { get; init; } = "Conscript";
+
+    public override required int Cost { get; init; }
+
+    public override required int Move { get; init; }
+
+    public override required int TransportCost { get; init; }
 
 }
