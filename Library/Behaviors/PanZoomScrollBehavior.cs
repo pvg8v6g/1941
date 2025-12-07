@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using Library.Utilities;
+using Microsoft.Xaml.Behaviors;
 
 namespace Library.Behaviors;
 
@@ -13,286 +13,359 @@ namespace Library.Behaviors;
 /// - Pan uses ScrollViewer offsets (no render translation), clamped on all sides with configurable hide margins.
 /// - Supports Space+Left drag or Middle drag for panning; mouse wheel for zoom around cursor.
 /// </summary>
-public static class PanZoomScrollBehavior
+public class PanZoomScrollBehavior : Behavior<ScrollViewer>
 {
-    // Attach to ScrollViewer
-    public static readonly DependencyProperty IsEnabledProperty = DependencyProperty.RegisterAttached(
-        "IsEnabled", typeof(bool), typeof(PanZoomScrollBehavior), new PropertyMetadata(false, OnIsEnabledChanged));
-    public static bool GetIsEnabled(DependencyObject obj) => (bool)obj.GetValue(IsEnabledProperty);
-    public static void SetIsEnabled(DependencyObject obj, bool value) => obj.SetValue(IsEnabledProperty, value);
 
-    public static readonly DependencyProperty TargetElementProperty = DependencyProperty.RegisterAttached(
-        "TargetElement", typeof(FrameworkElement), typeof(PanZoomScrollBehavior), new PropertyMetadata(null, OnTargetElementChanged));
-    public static FrameworkElement? GetTargetElement(DependencyObject obj) => (FrameworkElement?)obj.GetValue(TargetElementProperty);
-    public static void SetTargetElement(DependencyObject obj, FrameworkElement? value) => obj.SetValue(TargetElementProperty, value);
+    #region Dependency Properties
 
-    public static readonly DependencyProperty MinScaleProperty = DependencyProperty.RegisterAttached(
-        "MinScale", typeof(double), typeof(PanZoomScrollBehavior), new PropertyMetadata(0.2));
-    public static double GetMinScale(DependencyObject obj) => (double)obj.GetValue(MinScaleProperty);
-    public static void SetMinScale(DependencyObject obj, double value) => obj.SetValue(MinScaleProperty, value);
+    public static readonly DependencyProperty TargetElementProperty = DependencyProperty.Register(nameof(TargetElement), typeof(FrameworkElement), typeof(PanZoomScrollBehavior),
+        new PropertyMetadata(null, OnTargetElementChanged));
 
-    public static readonly DependencyProperty MaxScaleProperty = DependencyProperty.RegisterAttached(
-        "MaxScale", typeof(double), typeof(PanZoomScrollBehavior), new PropertyMetadata(8.0));
-    public static double GetMaxScale(DependencyObject obj) => (double)obj.GetValue(MaxScaleProperty);
-    public static void SetMaxScale(DependencyObject obj, double value) => obj.SetValue(MaxScaleProperty, value);
-
-    public static readonly DependencyProperty WheelZoomFactorProperty = DependencyProperty.RegisterAttached(
-        "WheelZoomFactor", typeof(double), typeof(PanZoomScrollBehavior), new PropertyMetadata(1.15));
-    public static double GetWheelZoomFactor(DependencyObject obj) => (double)obj.GetValue(WheelZoomFactorProperty);
-    public static void SetWheelZoomFactor(DependencyObject obj, double value) => obj.SetValue(WheelZoomFactorProperty, value);
-
-    // Edge hide margins (DIPs)
-    public static readonly DependencyProperty EdgeHideMarginProperty = DependencyProperty.RegisterAttached(
-        "EdgeHideMargin", typeof(Thickness), typeof(PanZoomScrollBehavior), new PropertyMetadata(new Thickness(16), OnEdgeMarginChanged));
-    public static Thickness GetEdgeHideMargin(DependencyObject obj) => (Thickness)obj.GetValue(EdgeHideMarginProperty);
-    public static void SetEdgeHideMargin(DependencyObject obj, Thickness value) => obj.SetValue(EdgeHideMarginProperty, value);
-
-    private class State
+    public FrameworkElement? TargetElement
     {
-        public FrameworkElement? Target;
-        public ScaleTransform? Scale;
-        public bool IsSpaceDown;
-        public bool IsDragging;
-        public Point Last;
-        public double ScaleValue = 1.0;
-        public Cursor? OriginalCursor;
+        get => (FrameworkElement?) GetValue(TargetElementProperty);
+        set => SetValue(TargetElementProperty, value);
     }
 
-    private static readonly Dictionary<ScrollViewer, State> States = new();
+    public static readonly DependencyProperty MinScaleProperty = DependencyProperty.Register(
+        nameof(MinScale), typeof(double), typeof(PanZoomScrollBehavior), new PropertyMetadata(0.2));
 
-    private static void OnIsEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    public double MinScale
     {
-        if (d is not ScrollViewer sv) return;
+        get => (double) GetValue(MinScaleProperty);
+        set => SetValue(MinScaleProperty, value);
+    }
 
-        if ((bool)e.NewValue)
-        {
-            if (!States.ContainsKey(sv)) States[sv] = new State();
-            sv.Loaded += OnLoaded;
-            sv.Unloaded += OnUnloaded;
-            sv.PreviewKeyDown += OnKeyDown;
-            sv.PreviewKeyUp += OnKeyUp;
-            sv.PreviewMouseDown += OnMouseDown;
-            sv.PreviewMouseMove += OnMouseMove;
-            sv.PreviewMouseUp += OnMouseUp;
-            sv.PreviewMouseWheel += OnMouseWheel;
-            sv.ScrollChanged += OnScrollOrSizeChanged;
-            sv.SizeChanged += OnScrollOrSizeChanged;
-            EnsureScale(sv);
-            ClampOffsets(sv);
-        }
-        else
-        {
-            if (States.Remove(sv))
-            {
-                sv.Loaded -= OnLoaded;
-                sv.Unloaded -= OnUnloaded;
-                sv.PreviewKeyDown -= OnKeyDown;
-                sv.PreviewKeyUp -= OnKeyUp;
-                sv.PreviewMouseDown -= OnMouseDown;
-                sv.PreviewMouseMove -= OnMouseMove;
-                sv.PreviewMouseUp -= OnMouseUp;
-                sv.PreviewMouseWheel -= OnMouseWheel;
-                sv.ScrollChanged -= OnScrollOrSizeChanged;
-                sv.SizeChanged -= OnScrollOrSizeChanged;
-            }
-        }
+    public static readonly DependencyProperty MaxScaleProperty = DependencyProperty.Register(
+        nameof(MaxScale), typeof(double), typeof(PanZoomScrollBehavior), new PropertyMetadata(8.0));
+
+    public double MaxScale
+    {
+        get => (double) GetValue(MaxScaleProperty);
+        set => SetValue(MaxScaleProperty, value);
+    }
+
+    public static readonly DependencyProperty WheelZoomFactorProperty = DependencyProperty.Register(
+        nameof(WheelZoomFactor), typeof(double), typeof(PanZoomScrollBehavior), new PropertyMetadata(1.15));
+
+    public double WheelZoomFactor
+    {
+        get => (double) GetValue(WheelZoomFactorProperty);
+        set => SetValue(WheelZoomFactorProperty, value);
+    }
+
+    public static readonly DependencyProperty EdgeHideMarginProperty = DependencyProperty.Register(nameof(EdgeHideMargin), typeof(Thickness), typeof(PanZoomScrollBehavior),
+        new PropertyMetadata(new Thickness(16), OnEdgeMarginChanged));
+
+    public Thickness EdgeHideMargin
+    {
+        get => (Thickness) GetValue(EdgeHideMarginProperty);
+        set => SetValue(EdgeHideMarginProperty, value);
     }
 
     private static void OnTargetElementChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is ScrollViewer sv && States.TryGetValue(sv, out var st))
+        if (d is PanZoomScrollBehavior b && b.AssociatedObject is not null)
         {
-            st.Target = e.NewValue as FrameworkElement;
-            EnsureScale(sv);
-            ClampOffsets(sv);
+            b._target = e.NewValue as FrameworkElement;
+            b.EnsureScale();
+            b.ClampOffsets();
         }
     }
 
     private static void OnEdgeMarginChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is ScrollViewer sv)
+        if (d is PanZoomScrollBehavior b && b.AssociatedObject is not null)
         {
-            ClampOffsets(sv);
+            b.ClampOffsets();
         }
     }
 
-    private static void OnLoaded(object sender, RoutedEventArgs e)
+    #endregion
+
+    #region Instance State
+
+    private FrameworkElement? _target;
+    private ScaleTransform? _scale;
+    private bool _isSpaceDown;
+    private bool _isDragging;
+    private Point _last;
+    private double _scaleValue = 1.0;
+    private CacheMode? _originalCacheMode;
+    private bool _cacheApplied;
+
+    #endregion
+
+    protected override void OnAttached()
     {
-        if (sender is ScrollViewer sv) { EnsureScale(sv); ClampOffsets(sv); }
+        base.OnAttached();
+        if (AssociatedObject is null) return;
+
+        AssociatedObject.Loaded += OnLoaded;
+        AssociatedObject.Unloaded += OnUnloaded;
+        AssociatedObject.PreviewKeyDown += OnKeyDown;
+        AssociatedObject.PreviewKeyUp += OnKeyUp;
+        AssociatedObject.PreviewMouseDown += OnMouseDown;
+        AssociatedObject.PreviewMouseMove += OnMouseMove;
+        AssociatedObject.PreviewMouseUp += OnMouseUp;
+        AssociatedObject.LostMouseCapture += OnLostMouseCapture;
+        AssociatedObject.PreviewMouseWheel += OnMouseWheel;
+        AssociatedObject.ScrollChanged += OnScrollOrSizeChanged;
+        AssociatedObject.SizeChanged += OnScrollOrSizeChanged;
+        AssociatedObject.Focusable = true;
+
+        EnsureScale();
+        ClampOffsets();
     }
 
-    private static void OnUnloaded(object sender, RoutedEventArgs e) { /* cleanup on disable */ }
-
-    private static void EnsureScale(ScrollViewer sv)
+    protected override void OnDetaching()
     {
-        if (!States.TryGetValue(sv, out var st)) return;
-        var target = st.Target ?? GetTargetElement(sv) as FrameworkElement;
-        if (target == null) return;
-        st.Target = target;
+        if (AssociatedObject is null) return;
 
-        // Ensure LayoutTransform has a ScaleTransform
+        Mouse.Capture(null);
+
+        // Ensure we restore any temporary cache
+        if (_target is not null && _cacheApplied)
+        {
+            _target.CacheMode = _originalCacheMode;
+            _originalCacheMode = null;
+            _cacheApplied = false;
+        }
+
+        AssociatedObject.Loaded -= OnLoaded;
+        AssociatedObject.Unloaded -= OnUnloaded;
+        AssociatedObject.PreviewKeyDown -= OnKeyDown;
+        AssociatedObject.PreviewKeyUp -= OnKeyUp;
+        AssociatedObject.PreviewMouseDown -= OnMouseDown;
+        AssociatedObject.PreviewMouseMove -= OnMouseMove;
+        AssociatedObject.PreviewMouseUp -= OnMouseUp;
+        AssociatedObject.LostMouseCapture -= OnLostMouseCapture;
+        AssociatedObject.PreviewMouseWheel -= OnMouseWheel;
+        AssociatedObject.ScrollChanged -= OnScrollOrSizeChanged;
+        AssociatedObject.SizeChanged -= OnScrollOrSizeChanged;
+
+        base.OnDetaching();
+    }
+
+    private void OnLoaded(object? sender, RoutedEventArgs e)
+    {
+        EnsureScale();
+        ClampOffsets();
+        AssociatedObject?.Dispatcher.BeginInvoke(new Action(() => Keyboard.Focus(AssociatedObject)));
+    }
+
+    private void OnUnloaded(object? sender, RoutedEventArgs e)
+    {
+        // no-op
+    }
+
+    private void EnsureScale()
+    {
+        if (AssociatedObject is null) return;
+        var target = _target ?? TargetElement;
+        if (target is null) return;
+        _target = target;
+
         if (target.LayoutTransform is not ScaleTransform scale)
         {
             scale = new ScaleTransform(1.0, 1.0);
             target.LayoutTransform = scale;
         }
-        st.Scale = scale;
-        st.ScaleValue = scale.ScaleX; // uniform
+
+        _scale = scale;
+        _scaleValue = scale.ScaleX; // uniform
     }
 
-    private static void OnKeyDown(object sender, KeyEventArgs e)
+    private void OnKeyDown(object? sender, KeyEventArgs e)
     {
-        if (sender is not ScrollViewer sv || !States.TryGetValue(sv, out var st)) return;
-        if (e.Key == Key.Space)
-        {
-            st.IsSpaceDown = true;
-            if (!st.IsDragging)
-            {
-                st.OriginalCursor ??= Mouse.OverrideCursor;
-                Mouse.OverrideCursor = Cursors.ScrollAll;
-            }
-            e.Handled = true;
-        }
-    }
-
-    private static void OnKeyUp(object sender, KeyEventArgs e)
-    {
-        if (sender is not ScrollViewer sv || !States.TryGetValue(sv, out var st)) return;
-        if (e.Key == Key.Space)
-        {
-            st.IsSpaceDown = false;
-            if (st.IsDragging)
-            {
-                st.IsDragging = false;
-                Mouse.Capture(null);
-            }
-            Mouse.OverrideCursor = st.OriginalCursor;
-            st.OriginalCursor = null;
-            e.Handled = true;
-        }
-    }
-
-    private static void OnMouseDown(object sender, MouseButtonEventArgs e)
-    {
-        if (sender is not ScrollViewer sv || !States.TryGetValue(sv, out var st) || st.Target is null) return;
-        if (e.ChangedButton == MouseButton.Middle || (e.ChangedButton == MouseButton.Left && st.IsSpaceDown))
-        {
-            st.IsDragging = true;
-            st.Last = e.GetPosition(sv);
-            Mouse.Capture(sv);
-            e.Handled = true;
-        }
-    }
-
-    private static void OnMouseMove(object sender, MouseEventArgs e)
-    {
-        if (sender is not ScrollViewer sv || !States.TryGetValue(sv, out var st) || !st.IsDragging) return;
-        var pos = e.GetPosition(sv);
-        var dx = pos.X - st.Last.X;
-        var dy = pos.Y - st.Last.Y;
-        st.Last = pos;
-
-        // Scroll offsets move opposite to drag direction
-        sv.ScrollToHorizontalOffset(sv.HorizontalOffset - dx);
-        sv.ScrollToVerticalOffset(sv.VerticalOffset - dy);
-        ClampOffsets(sv);
+        if (AssociatedObject is null) return;
+        if (e.Key is not Key.Space) return;
+        _isSpaceDown = true;
+        if (!_isDragging) Mouse.OverrideCursor = Cursors.ScrollAll;
         e.Handled = true;
     }
 
-    private static void OnMouseUp(object sender, MouseButtonEventArgs e)
+    private void OnKeyUp(object? sender, KeyEventArgs e)
     {
-        if (sender is not ScrollViewer sv || !States.TryGetValue(sv, out var st)) return;
-        if (st.IsDragging)
+        if (AssociatedObject is null) return;
+        if (e.Key is not Key.Space) return;
+        _isSpaceDown = false;
+        if (_isDragging)
         {
-            st.IsDragging = false;
+            _isDragging = false;
             Mouse.Capture(null);
-            e.Handled = true;
+            // Restore cache when drag ends via Space release
+            if (_target is not null && _cacheApplied)
+            {
+                _target.CacheMode = _originalCacheMode;
+                _originalCacheMode = null;
+                _cacheApplied = false;
+            }
         }
-    }
 
-    private static void OnMouseWheel(object sender, MouseWheelEventArgs e)
-    {
-        if (sender is not ScrollViewer sv || !States.TryGetValue(sv, out var st) || st.Target is null) return;
-        EnsureScale(sv);
-        if (st.Scale is null) return;
-
-        double factor = e.Delta > 0 ? GetWheelZoomFactor(sv) : 1.0 / GetWheelZoomFactor(sv);
-        double min = ComputeEffectiveMinScale(sv, st);
-        double max = GetMaxScale(sv);
-
-        // Anchor zoom around cursor position within the ScrollViewer
-        var mouse = e.GetPosition(sv);
-        double oldScale = st.ScaleValue;
-        double newScale = Math.Clamp(oldScale * factor, min, max);
-        if (Math.Abs(newScale - oldScale) < 0.0001) { e.Handled = true; return; }
-
-        // Compute content point under cursor in scaled space
-        double contentX = sv.HorizontalOffset + mouse.X;
-        double contentY = sv.VerticalOffset + mouse.Y;
-
-        st.ScaleValue = newScale;
-        st.Scale.ScaleX = newScale;
-        st.Scale.ScaleY = newScale;
-
-        // Keep the same content point under the cursor after scaling
-        double desiredOffsetX = contentX * (newScale / oldScale) - mouse.X;
-        double desiredOffsetY = contentY * (newScale / oldScale) - mouse.Y;
-        sv.ScrollToHorizontalOffset(desiredOffsetX);
-        sv.ScrollToVerticalOffset(desiredOffsetY);
-
-        ClampOffsets(sv);
+        Mouse.OverrideCursor = Global.GameCursor;
         e.Handled = true;
     }
 
-    private static void OnScrollOrSizeChanged(object sender, EventArgs e)
+    private void OnMouseDown(object? sender, MouseButtonEventArgs e)
     {
-        if (sender is ScrollViewer sv)
+        if (AssociatedObject is null || _target is null) return;
+        if (e.ChangedButton is not (MouseButton.Left or MouseButton.Middle)) return;
+        if (e.ChangedButton is MouseButton.Left && !_isSpaceDown) return;
+
+        _isDragging = true;
+        _last = e.GetPosition(AssociatedObject);
+        Mouse.Capture(AssociatedObject);
+        Mouse.OverrideCursor = Cursors.SizeAll;
+        // Apply temporary bitmap cache while dragging to improve responsiveness
+        if (!_cacheApplied)
         {
-            ClampOffsets(sv);
+            _originalCacheMode = _target.CacheMode;
+            _target.CacheMode = new BitmapCache(1.0);
+            _cacheApplied = true;
         }
+
+        e.Handled = true;
     }
 
-    private static double ComputeEffectiveMinScale(ScrollViewer sv, State st)
+    private void OnMouseMove(object? sender, MouseEventArgs e)
     {
-        var target = st.Target;
-        if (target == null) return GetMinScale(sv);
-        double vw = Math.Max(0, sv.ViewportWidth);
-        double vh = Math.Max(0, sv.ViewportHeight);
-        double cw = Math.Max(0, target.ActualWidth);
-        double ch = Math.Max(0, target.ActualHeight);
-        if (vw <= 0 || vh <= 0 || cw <= 0 || ch <= 0) return GetMinScale(sv);
-        double needed = Math.Max(vw / cw, vh / ch); // fit-to-viewport min
-        return Math.Max(GetMinScale(sv), needed);
+        if (AssociatedObject is null || !_isDragging) return;
+        var pos = e.GetPosition(AssociatedObject);
+        var dx = pos.X - _last.X;
+        var dy = pos.Y - _last.Y;
+        _last = pos;
+
+        AssociatedObject.ScrollToHorizontalOffset(AssociatedObject.HorizontalOffset - dx);
+        AssociatedObject.ScrollToVerticalOffset(AssociatedObject.VerticalOffset - dy);
+        ClampOffsets();
+        e.Handled = true;
     }
 
-    private static void ClampOffsets(ScrollViewer sv)
+    private void OnMouseUp(object? sender, MouseButtonEventArgs e)
     {
-        if (!States.TryGetValue(sv, out var st) || st.Target is null || st.Scale is null) return;
-        var m = GetEdgeHideMargin(sv);
+        if (AssociatedObject is null) return;
+        if (!_isDragging) return;
+        _isDragging = false;
+        Mouse.Capture(null);
+        Mouse.OverrideCursor = Global.GameCursor;
+        // Restore cache when drag ends
+        if (_target is not null && _cacheApplied)
+        {
+            _target.CacheMode = _originalCacheMode;
+            _originalCacheMode = null;
+            _cacheApplied = false;
+        }
 
-        double vw = Math.Max(0, sv.ViewportWidth);
-        double vh = Math.Max(0, sv.ViewportHeight);
-        double cw = Math.Max(0, st.Target.ActualWidth * st.ScaleValue);
-        double ch = Math.Max(0, st.Target.ActualHeight * st.ScaleValue);
+        e.Handled = true;
+    }
 
-        // When content smaller than viewport, center it and set offsets to 0 (ScrollViewer centers content automatically if alignment is centered; we clamp to 0 to avoid negative offsets)
-        double maxX = Math.Max(0, cw - vw - m.Right);
-        double maxY = Math.Max(0, ch - vh - m.Bottom);
-        double minX = 0 + m.Left;
-        double minY = 0 + m.Top;
+    private void OnLostMouseCapture(object? sender, MouseEventArgs e)
+    {
+        if (AssociatedObject is null) return;
+        if (!_isDragging) return;
+        _isDragging = false;
+        Mouse.Capture(null);
+        // Restore cache when capture is lost
+        if (_target is null || !_cacheApplied) return;
+        _target.CacheMode = _originalCacheMode;
+        _originalCacheMode = null;
+        _cacheApplied = false;
+    }
 
-        // If margins exceed available scroll, clamp to 0 range
-        if (maxX < minX) { minX = 0; maxX = 0; }
-        if (maxY < minY) { minY = 0; maxY = 0; }
+    private void OnMouseWheel(object? sender, MouseWheelEventArgs e)
+    {
+        if (AssociatedObject is null || _target is null) return;
+        EnsureScale();
+        if (_scale is null) return;
 
-        double newX = Math.Max(minX, Math.Min(maxX, sv.HorizontalOffset));
-        double newY = Math.Max(minY, Math.Min(maxY, sv.VerticalOffset));
-        if (!DoubleUtil.AreClose(newX, sv.HorizontalOffset)) sv.ScrollToHorizontalOffset(newX);
-        if (!DoubleUtil.AreClose(newY, sv.VerticalOffset)) sv.ScrollToVerticalOffset(newY);
+        var factor = e.Delta > 0 ? WheelZoomFactor : 1.0 / WheelZoomFactor;
+        var min = ComputeEffectiveMinScale();
+        var max = MaxScale;
+
+        var mouse = e.GetPosition(AssociatedObject);
+        var oldScale = _scaleValue;
+        var newScale = Math.Clamp(oldScale * factor, min, max);
+        if (Math.Abs(newScale - oldScale) < 0.0001)
+        {
+            e.Handled = true;
+            return;
+        }
+
+        var contentX = AssociatedObject.HorizontalOffset + mouse.X;
+        var contentY = AssociatedObject.VerticalOffset + mouse.Y;
+
+        _scaleValue = newScale;
+        _scale.ScaleX = newScale;
+        _scale.ScaleY = newScale;
+
+        var desiredOffsetX = contentX * (newScale / oldScale) - mouse.X;
+        var desiredOffsetY = contentY * (newScale / oldScale) - mouse.Y;
+        AssociatedObject.ScrollToHorizontalOffset(desiredOffsetX);
+        AssociatedObject.ScrollToVerticalOffset(desiredOffsetY);
+
+        ClampOffsets();
+        e.Handled = true;
+    }
+
+    private void OnScrollOrSizeChanged(object? sender, EventArgs e)
+    {
+        if (AssociatedObject is null) return;
+        ClampOffsets();
+    }
+
+    private double ComputeEffectiveMinScale()
+    {
+        if (AssociatedObject is null) return MinScale;
+        var target = _target;
+        if (target is null) return MinScale;
+        var vw = Math.Max(0, AssociatedObject.ViewportWidth);
+        var vh = Math.Max(0, AssociatedObject.ViewportHeight);
+        var cw = Math.Max(0, target.ActualWidth);
+        var ch = Math.Max(0, target.ActualHeight);
+        if (vw <= 0 || vh <= 0 || cw <= 0 || ch <= 0) return MinScale;
+        var needed = Math.Max(vw / cw, vh / ch);
+        return Math.Max(MinScale, needed);
+    }
+
+    private void ClampOffsets()
+    {
+        if (AssociatedObject is null || _target is null || _scale is null) return;
+        var m = EdgeHideMargin;
+
+        var vw = Math.Max(0, AssociatedObject.ViewportWidth);
+        var vh = Math.Max(0, AssociatedObject.ViewportHeight);
+        var cw = Math.Max(0, _target.ActualWidth * _scaleValue);
+        var ch = Math.Max(0, _target.ActualHeight * _scaleValue);
+
+        var maxX = Math.Max(0, cw - vw - m.Right);
+        var maxY = Math.Max(0, ch - vh - m.Bottom);
+        var minX = 0 + m.Left;
+        var minY = 0 + m.Top;
+
+        if (maxX < minX)
+        {
+            minX = 0;
+            maxX = 0;
+        }
+
+        if (maxY < minY)
+        {
+            minY = 0;
+            maxY = 0;
+        }
+
+        var newX = Math.Max(minX, Math.Min(maxX, AssociatedObject.HorizontalOffset));
+        var newY = Math.Max(minY, Math.Min(maxY, AssociatedObject.VerticalOffset));
+        if (!DoubleUtil.AreClose(newX, AssociatedObject.HorizontalOffset)) AssociatedObject.ScrollToHorizontalOffset(newX);
+        if (!DoubleUtil.AreClose(newY, AssociatedObject.VerticalOffset)) AssociatedObject.ScrollToVerticalOffset(newY);
     }
 
     private static class DoubleUtil
     {
-        public static bool AreClose(double a, double b) => Math.Abs(a - b) < 0.5; // within half a DIP is fine
+
+        public static bool AreClose(double a, double b) => Math.Abs(a - b) < 0.5;
+
     }
+
 }

@@ -49,7 +49,7 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         get;
         set
         {
-            Console.WriteLine(value);
+            //Console.WriteLine(value);
             if (field == value) return;
             field = value;
             OnPropertyChanged();
@@ -67,6 +67,7 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
 
     // Mouse interaction commands (for behaviors)
     public RelayCommand<Point> MouseMoveCommand => new(p => OnMouseMove(p.X, p.Y));
+
     public RelayCommand<object?> MouseLeaveCommand => new(_ => ClearHover());
 
     private ISvgClassColorService SvgClassColorService => svgClassColorService;
@@ -255,9 +256,7 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         if (string.IsNullOrWhiteSpace(_worldSvgXmlOriginal)) return;
 
         // Build fills dictionary per class ownership; default neutral
-        var allClasses = _classToHitColor.Keys.Count > 0
-            ? _classToHitColor.Keys.AsEnumerable()
-            : SvgClassColorService.ExtractClasses(_worldSvgXmlOriginal!);
+        var allClasses = _classToHitColor.Keys.Count > 0 ? _classToHitColor.Keys.AsEnumerable() : SvgClassColorService.ExtractClasses(_worldSvgXmlOriginal!);
 
         var fills = new Dictionary<string, SKColor>(StringComparer.OrdinalIgnoreCase);
         foreach (var cls in allClasses)

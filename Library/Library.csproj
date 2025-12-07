@@ -13,4 +13,10 @@
       <PackageReference Include="SkiaSharp.Views.WPF" Version="3.116.1" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Models\Aircraft\" />
+      <Folder Include="Models\Tanks\" />
+      <Folder Include="Models\Vehicles\" />
+    </ItemGroup>
+
 </Project>

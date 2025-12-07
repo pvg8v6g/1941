@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:gameViewModel="clr-namespace:UX.ViewModels.GameViewModel"
              xmlns:behaviors="clr-namespace:Library.Behaviors;assembly=Library"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:wpf="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance gameViewModel:GameViewModel}"
@@ -14,10 +15,15 @@
                   PanningMode="None"
                   CanContentScroll="False"
                   ClipToBounds="True"
-                  Background="Transparent"
-                  behaviors:PanZoomScrollBehavior.IsEnabled="True"
-                  behaviors:PanZoomScrollBehavior.TargetElement="{Binding ElementName=MapGrid}"
-                  behaviors:PanZoomScrollBehavior.EdgeHideMargin="0,0,0,0">
+                  Background="Transparent">
+        <i:Interaction.Behaviors>
+            <behaviors:PanZoomScrollBehavior
+                TargetElement="{Binding ElementName=MapGrid}"
+                EdgeHideMargin="0,0,0,0"
+                MinScale="0.2"
+                MaxScale="8"
+                WheelZoomFactor="1.15" />
+        </i:Interaction.Behaviors>
         <Grid x:Name="MapGrid"
               Width="{Binding MapWidth}"
               Height="{Binding MapHeight}"

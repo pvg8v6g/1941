@@ -2,15 +2,15 @@
 
 namespace Library.Models.Infantry;
 
-public class Conscript : BaseUnit
+public class AntiArmor : BaseUnit
 {
 
-    public override required string Name { get; init; } = "Conscript";
+    public override required string Name { get; init; } = "Anti-Armor";
 
-    public override required int Cost { get; init; } = 100;
+    public override required int Cost { get; init; } = 200;
 
     public override required int Move { get; init; } = 1;
-
+    
     public override required int Attack { get; init; } = 25;
 
     public override required int Defense { get; init; } = 40;
@@ -19,6 +19,6 @@ public class Conscript : BaseUnit
 
     public override required Classification Classification { get; init; } = Classification.Infantry;
 
-    public override required Weapon[] Weapons { get; init; } = [Weapon.Rifle];
+    public override required Weapon[] Weapons { get; init; } = [Weapon.RPG];
 
 }
