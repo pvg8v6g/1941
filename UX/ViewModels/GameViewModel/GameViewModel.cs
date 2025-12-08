@@ -49,7 +49,7 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         get;
         set
         {
-            //Console.WriteLine(value);
+            Console.WriteLine(value);
             if (field == value) return;
             field = value;
             OnPropertyChanged();
