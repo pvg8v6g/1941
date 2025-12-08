@@ -11,7 +11,6 @@ namespace UX.ViewModels.GameViewModel;
 
 public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseViewModel.BaseViewModel
 {
-
     #region Properties
 
     private int InvalidateRequested
@@ -119,6 +118,7 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         LoadBorders(basePath);
         LoadLabels(basePath);
         InvalidateRequested++;
+        FactionColors();
     }
 
     private void PaintWaterSurface(SKPaintSurfaceEventArgs e)
@@ -167,14 +167,12 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
     {
         if (string.IsNullOrWhiteSpace(_worldSvgXmlCurrent)) return;
         var updated = SvgClassColorService.UpsertClassFill(_worldSvgXmlCurrent!, className, color);
-        if (!ReferenceEquals(updated, _worldSvgXmlCurrent))
-        {
-            _worldSvgXmlCurrent = updated;
-            _worldSvg ??= new SKSvg();
-            using var ms = new MemoryStream(Encoding.UTF8.GetBytes(_worldSvgXmlCurrent));
-            _worldSvg.Load(ms);
-            InvalidateRequested++;
-        }
+        if (ReferenceEquals(updated, _worldSvgXmlCurrent)) return;
+        _worldSvgXmlCurrent = updated;
+        _worldSvg ??= new SKSvg();
+        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(_worldSvgXmlCurrent));
+        _worldSvg.Load(ms);
+        InvalidateRequested++;
     }
 
     public void SetPowerColor(string power, SKColor color)
@@ -286,7 +284,7 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         foreach (var cls in classes.OrderBy(s => s, StringComparer.OrdinalIgnoreCase))
         {
             // pack id into RGB
-            var r = (byte) ((i & 0x0000FF));
+            var r = (byte) (i & 0x0000FF);
             var g = (byte) ((i & 0x00FF00) >> 8);
             var b = (byte) ((i & 0xFF0000) >> 16);
             var col = new SKColor(r, g, b, 255);
@@ -305,8 +303,8 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
 
         if (svg.Picture is null) return;
 
-        var width = (int) Math.Ceiling((svg.Picture.CullRect.Width) * DrawScale);
-        var height = (int) Math.Ceiling((svg.Picture.CullRect.Height) * DrawScale);
+        var width = (int) Math.Ceiling(svg.Picture.CullRect.Width * DrawScale);
+        var height = (int) Math.Ceiling(svg.Picture.CullRect.Height * DrawScale);
 
         _hitmapBitmap?.Dispose();
         _hitmapBitmap = new SKBitmap(width, height, true);
@@ -327,8 +325,8 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
 
         if (_waterSvg?.Picture is null) return;
         var scale = 2.5d;
-        MapWidth = (_waterSvg.Picture.CullRect.Width) * scale;
-        MapHeight = (_waterSvg.Picture.CullRect.Height) * scale;
+        MapWidth = _waterSvg.Picture.CullRect.Width * scale;
+        MapHeight = _waterSvg.Picture.CullRect.Height * scale;
     }
 
     private void LoadWorld(string basePath)
@@ -356,6 +354,10 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         _labelsSvg.Load(Path.Combine(basePath, "Graphics", "Images", "labels.svg"));
     }
 
-    #endregion
+    private void FactionColors()
+    {
+        
+    }
 
+    #endregion
 }
