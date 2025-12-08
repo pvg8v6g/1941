@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!--
 *************Map created by Simplemaps.com********************		
 *************Attribution is highly appreciated!***************
@@ -28,18 +28,21 @@ THE SOFTWARE.
 -->
 <svg fill="none" height="857" viewBox="0 0 2000 857" width="2000" xmlns="http://www.w3.org/2000/svg">
     <defs>
-        <style><![CDATA[
+        <style>
+            <![CDATA[
             /* Center all labels on their x/y anchor point */
-            text {
-                text-anchor: middle;
-                dominant-baseline: middle;
-                fill: #ffffff;
-                stroke: #000000;
-                stroke-width: 1;
-                font-family: Segoe UI, Arial, sans-serif;
-                font-size: 6px;
-            }
-        ]]></style>
+                .formatted-text {
+                    text-anchor: middle;
+                    dominant-baseline: middle;
+                    fill: #eb2f64;
+                    font-family: Britannic Bold;
+                    font-size: 10px;
+                    font-weight: bold;
+                    stroke: #ffffff;
+                    stroke-width: 0.2px;
+                }
+            ]]>
+        </style>
         <clipPath id="bounds">
             <rect x="0" y="0" width="2000" height="857"/>
         </clipPath>
@@ -48,165 +51,165 @@ THE SOFTWARE.
     <!-- Europe — 1941 English names (pre‑invasion where applicable). -->
     <g id="labels-europe" pointer-events="none" clip-path="url(#bounds)">
         <!-- British Isles -->
-        <text x="549" y="157">
+        <text class="formatted-text" x="549" y="157">
             <tspan x="549" dy="-0.6em">United</tspan>
             <tspan x="549" dy="1.2em">Kingdom</tspan>
         </text>
-        <text x="530" y="160">Ireland</text>
+        <text class="formatted-text" x="530" y="160">Ireland</text>
 
         <!-- Western Europe -->
-        <text x="587" y="205">France</text>
-        <text x="530" y="260">Spain</text>
-        <text x="505" y="270">Portugal</text>
-        <text x="585" y="187">Belgium</text>
-        <text x="598" y="178">Netherlands</text>
-        <text x="605" y="200">Luxembourg</text>
-        <text x="610" y="215">Switzerland</text>
+        <text class="formatted-text" x="587" y="205">France</text>
+        <text class="formatted-text" x="530" y="260">Spain</text>
+        <text class="formatted-text" x="505" y="270">Portugal</text>
+        <text class="formatted-text" x="585" y="187">Belgium</text>
+        <text class="formatted-text" x="598" y="178">Netherlands</text>
+        <text class="formatted-text" x="605" y="200">Luxembourg</text>
+        <text class="formatted-text" x="610" y="215">Switzerland</text>
 
         <!-- Central Europe -->
-        <text x="625" y="190">Germany</text>
-        <text x="645" y="205">Austria</text>
-        <text x="636" y="190">Czechoslovakia</text>
-        <text x="655" y="210">Hungary</text>
+        <text class="formatted-text" x="625" y="190">Germany</text>
+        <text class="formatted-text" x="645" y="205">Austria</text>
+        <text class="formatted-text" x="636" y="190">Czechoslovakia</text>
+        <text class="formatted-text" x="655" y="210">Hungary</text>
 
         <!-- Northern Europe -->
-        <text x="614" y="145">Denmark</text>
-        <text x="639" y="58">Norway</text>
-        <text x="655" y="100">Sweden</text>
-        <text x="690" y="100">Finland</text>
-        <text x="690" y="140">Estonia</text>
-        <text x="680" y="150">Latvia</text>
-        <text x="670" y="160">Lithuania</text>
+        <text class="formatted-text" x="614" y="145">Denmark</text>
+        <text class="formatted-text" x="639" y="58">Norway</text>
+        <text class="formatted-text" x="655" y="100">Sweden</text>
+        <text class="formatted-text" x="690" y="100">Finland</text>
+        <text class="formatted-text" x="690" y="140">Estonia</text>
+        <text class="formatted-text" x="680" y="150">Latvia</text>
+        <text class="formatted-text" x="670" y="160">Lithuania</text>
 
         <!-- Eastern Europe & Balkans (pre‑invasion labels) -->
-        <text x="665" y="180">Poland</text>
-        <text x="665" y="235">Yugoslavia</text>
-        <text x="680" y="220">Romania</text>
-        <text x="700" y="240">Bulgaria</text>
-        <text x="670" y="235">Albania</text>
-        <text x="690" y="252">Greece</text>
+        <text class="formatted-text" x="665" y="180">Poland</text>
+        <text class="formatted-text" x="665" y="235">Yugoslavia</text>
+        <text class="formatted-text" x="680" y="220">Romania</text>
+        <text class="formatted-text" x="700" y="240">Bulgaria</text>
+        <text class="formatted-text" x="670" y="235">Albania</text>
+        <text class="formatted-text" x="690" y="252">Greece</text>
 
         <!-- Near East & Eurasia edge -->
-        <text x="748" y="251">Turkey</text>
-        <text x="972" y="116">Soviet Union</text>
+        <text class="formatted-text" x="748" y="251">Turkey</text>
+        <text class="formatted-text" x="972" y="116">Soviet Union</text>
     </g>
 
     <!-- Africa & Middle East — 1941 English names; pre‑invasion labels; centered. -->
     <g id="labels-africa-me" pointer-events="none" clip-path="url(#bounds)">
         <!-- North Africa -->
-        <text x="555" y="300">Morocco</text>
-        <text x="540" y="320">Western Sahara</text>
-        <text x="605" y="360">Algeria</text>
-        <text x="640" y="320">Tunisia</text>
-        <text x="700" y="380">Libya</text>
-        <text x="760" y="330">Egypt</text>
+        <text class="formatted-text" x="555" y="300">Morocco</text>
+        <text class="formatted-text" x="540" y="320">Western Sahara</text>
+        <text class="formatted-text" x="605" y="360">Algeria</text>
+        <text class="formatted-text" x="640" y="320">Tunisia</text>
+        <text class="formatted-text" x="700" y="380">Libya</text>
+        <text class="formatted-text" x="760" y="330">Egypt</text>
 
         <!-- Middle East & Arabia (WW2 names) -->
-        <text x="770" y="290">Syria</text>
-        <text x="765" y="285">Lebanon</text>
-        <text x="775" y="300">Palestine</text>
-        <text x="785" y="305">Transjordan</text>
-        <text x="815" y="285">Iraq</text>
-        <text x="850" y="310">Persia</text>
-        <text x="830" y="315">Kuwait</text>
-        <text x="842" y="334">Bahrain</text>
-        <text x="848" y="340">Qatar</text>
-        <text x="878" y="344">Trucial States</text>
-        <text x="870" y="380">Oman</text>
-        <text x="860" y="400">Yemen</text>
-        <text x="820" y="350">Saudi Arabia</text>
+        <text class="formatted-text" x="770" y="290">Syria</text>
+        <text class="formatted-text" x="765" y="285">Lebanon</text>
+        <text class="formatted-text" x="775" y="300">Palestine</text>
+        <text class="formatted-text" x="785" y="305">Transjordan</text>
+        <text class="formatted-text" x="815" y="285">Iraq</text>
+        <text class="formatted-text" x="850" y="310">Persia</text>
+        <text class="formatted-text" x="830" y="315">Kuwait</text>
+        <text class="formatted-text" x="842" y="334">Bahrain</text>
+        <text class="formatted-text" x="848" y="340">Qatar</text>
+        <text class="formatted-text" x="878" y="344">Trucial States</text>
+        <text class="formatted-text" x="870" y="380">Oman</text>
+        <text class="formatted-text" x="860" y="400">Yemen</text>
+        <text class="formatted-text" x="820" y="350">Saudi Arabia</text>
 
         <!-- Northeast Africa / Horn -->
-        <text x="780" y="410">Sudan</text>
-        <text x="805" y="425">Eritrea</text>
-        <text x="790" y="440">Ethiopia</text>
-        <text x="810" y="440">Djibouti</text>
-        <text x="825" y="455">Somalia</text>
+        <text class="formatted-text" x="780" y="410">Sudan</text>
+        <text class="formatted-text" x="805" y="425">Eritrea</text>
+        <text class="formatted-text" x="790" y="440">Ethiopia</text>
+        <text class="formatted-text" x="810" y="440">Djibouti</text>
+        <text class="formatted-text" x="825" y="455">Somalia</text>
 
         <!-- West Africa -->
-        <text x="495" y="420">Senegal</text>
-        <text x="480" y="420">The Gambia</text>
-        <text x="485" y="430">Guinea‑Bissau</text>
-        <text x="500" y="435">Guinea</text>
-        <text x="510" y="448">Sierra Leone</text>
-        <text x="520" y="455">Liberia</text>
-        <text x="540" y="450">Côte d'Ivoire</text>
-        <text x="567" y="440">Ghana</text>
-        <text x="578" y="432">Togo</text>
-        <text x="586" y="440">Benin</text>
-        <text x="568" y="418">Burkina Faso</text>
-        <text x="590" y="405">Mali</text>
-        <text x="560" y="400">Mauritania</text>
+        <text class="formatted-text" x="495" y="420">Senegal</text>
+        <text class="formatted-text" x="480" y="420">The Gambia</text>
+        <text class="formatted-text" x="485" y="430">Guinea‑Bissau</text>
+        <text class="formatted-text" x="500" y="435">Guinea</text>
+        <text class="formatted-text" x="510" y="448">Sierra Leone</text>
+        <text class="formatted-text" x="520" y="455">Liberia</text>
+        <text class="formatted-text" x="540" y="450">Côte d'Ivoire</text>
+        <text class="formatted-text" x="567" y="440">Ghana</text>
+        <text class="formatted-text" x="578" y="432">Togo</text>
+        <text class="formatted-text" x="586" y="440">Benin</text>
+        <text class="formatted-text" x="568" y="418">Burkina Faso</text>
+        <text class="formatted-text" x="590" y="405">Mali</text>
+        <text class="formatted-text" x="560" y="400">Mauritania</text>
 
         <!-- Central Africa -->
-        <text x="660" y="420">Niger</text>
-        <text x="700" y="465">Central African Republic</text>
-        <text x="655" y="465">Cameroon</text>
-        <text x="630" y="490">Equatorial Guinea</text>
-        <text x="650" y="500">Gabon</text>
-        <text x="670" y="500">Republic of the Congo</text>
-        <text x="720" y="500">
+        <text class="formatted-text" x="660" y="420">Niger</text>
+        <text class="formatted-text" x="700" y="465">Central African Republic</text>
+        <text class="formatted-text" x="655" y="465">Cameroon</text>
+        <text class="formatted-text" x="630" y="490">Equatorial Guinea</text>
+        <text class="formatted-text" x="650" y="500">Gabon</text>
+        <text class="formatted-text" x="670" y="500">Republic of the Congo</text>
+        <text class="formatted-text" x="720" y="500">
             <tspan x="720" dy="-0.6em">Belgian</tspan>
             <tspan x="720" dy="1.2em">Congo</tspan>
         </text>
 
         <!-- Southern Africa -->
-        <text x="670" y="560">Angola</text>
-        <text x="735" y="565">Zambia</text>
-        <text x="765" y="595">Malawi</text>
-        <text x="750" y="610">Mozambique</text>
-        <text x="700" y="620">Namibia</text>
-        <text x="710" y="640">Botswana</text>
-        <text x="735" y="635">Zimbabwe</text>
-        <text x="720" y="690">South Africa</text>
-        <text x="719" y="700">Lesotho</text>
-        <text x="742" y="668">Swaziland</text>
-        <text x="845" y="610">Madagascar</text>
-        <text x="430" y="400">Cape Verde</text>
+        <text class="formatted-text" x="670" y="560">Angola</text>
+        <text class="formatted-text" x="735" y="565">Zambia</text>
+        <text class="formatted-text" x="765" y="595">Malawi</text>
+        <text class="formatted-text" x="750" y="610">Mozambique</text>
+        <text class="formatted-text" x="700" y="620">Namibia</text>
+        <text class="formatted-text" x="710" y="640">Botswana</text>
+        <text class="formatted-text" x="735" y="635">Zimbabwe</text>
+        <text class="formatted-text" x="720" y="690">South Africa</text>
+        <text class="formatted-text" x="719" y="700">Lesotho</text>
+        <text class="formatted-text" x="742" y="668">Swaziland</text>
+        <text class="formatted-text" x="845" y="610">Madagascar</text>
+        <text class="formatted-text" x="413.10904139077303" y="401.32850236252347">Cape Verde</text>
     </g>
 
     <!-- Asia–Pacific — 1941 English names; WW2 era labels; centered. -->
     <g id="labels-asia-pacific" pointer-events="none" clip-path="url(#bounds)">
         <!-- South & Central Asia -->
-        <text x="965" y="275">Afghanistan</text>
-        <text x="1030" y="340">British India</text>
-        <text x="1048" y="325">Nepal</text>
-        <text x="1070" y="325">Bhutan</text>
-        <text x="1028" y="462">Ceylon</text>
+        <text class="formatted-text" x="965" y="275">Afghanistan</text>
+        <text class="formatted-text" x="1030" y="340">British India</text>
+        <text class="formatted-text" x="1048" y="325">Nepal</text>
+        <text class="formatted-text" x="1070" y="325">Bhutan</text>
+        <text class="formatted-text" x="1028" y="462">Ceylon</text>
 
         <!-- East Asia -->
-        <text x="1185" y="300">China</text>
-        <text x="1078" y="185">Mongolia</text>
-        <text x="1238" y="265">Korea</text>
-        <text x="1240" y="356">Formosa</text>
-        <text x="1295" y="275">Japan</text>
+        <text class="formatted-text" x="1185" y="300">China</text>
+        <text class="formatted-text" x="1078" y="185">Mongolia</text>
+        <text class="formatted-text" x="1238" y="265">Korea</text>
+        <text class="formatted-text" x="1240" y="356">Formosa</text>
+        <text class="formatted-text" x="1295" y="275">Japan</text>
 
         <!-- Southeast Asia (WW2 names) -->
-        <text x="1128" y="364">Burma</text>
-        <text x="1169" y="390">French Indochina</text>
-        <text x="1158" y="410">Siam</text>
-        <text x="1185" y="475">British Malaya</text>
-        <text x="1268" y="450">Philippines</text>
-        <text x="1240" y="545">
+        <text class="formatted-text" x="1128" y="364">Burma</text>
+        <text class="formatted-text" x="1169" y="390">French Indochina</text>
+        <text class="formatted-text" x="1158" y="410">Siam</text>
+        <text class="formatted-text" x="1185" y="475">British Malaya</text>
+        <text class="formatted-text" x="1268" y="450">Philippines</text>
+        <text class="formatted-text" x="1240" y="545">
             <tspan x="1240" dy="-0.6em">Netherlands</tspan>
             <tspan x="1240" dy="1.2em">East Indies</tspan>
         </text>
 
         <!-- China coast concessions (small) -->
-        <text x="1178" y="322">Hong Kong</text>
-        <text x="1172" y="328">Macau</text>
+        <text class="formatted-text" x="1178" y="322">Hong Kong</text>
+        <text class="formatted-text" x="1172" y="328">Macau</text>
 
         <!-- Oceania -->
-        <text x="1285" y="690">Australia</text>
-        <text x="1460" y="770">New Zealand</text>
-        <text x="1325" y="520">New Guinea</text>
-        <text x="1480" y="570">Solomon Islands</text>
-        <text x="1495" y="640">New Caledonia</text>
-        <text x="1562" y="620">Fiji</text>
+        <text class="formatted-text" x="1285" y="690">Australia</text>
+        <text class="formatted-text" x="1460" y="770">New Zealand</text>
+        <text class="formatted-text" x="1325" y="520">New Guinea</text>
+        <text class="formatted-text" x="1480" y="570">Solomon Islands</text>
+        <text class="formatted-text" x="1495" y="640">New Caledonia</text>
+        <text class="formatted-text" x="1562" y="620">Fiji</text>
 
         <!-- Central Pacific grouped labels -->
-        <text x="-180" y="610">Hawaiian Islands</text>
-        <text x="1390" y="545">Papua</text>
+        <text class="formatted-text" x="-180" y="610">Hawaiian Islands</text>
+        <text class="formatted-text" x="1390" y="545">Papua</text>
     </g>
 
     <!-- Americas — 1941 English names; island chains grouped; labels centered on countries. -->
@@ -214,81 +217,84 @@ THE SOFTWARE.
         <!-- North America -->
         <!-- Split labels as requested -->
         <!-- Place WESTERN labels on the far right (Pacific wrap panel) as requested -->
-        <text x="1840" y="180">
+        <text class="formatted-text" x="1840" y="180">
             <tspan x="1840" dy="-0.6em">Western</tspan>
             <tspan x="1840" dy="1.2em">Canada</tspan>
         </text>
-        <text x="160" y="180">
-            <tspan x="160" dy="-0.6em">Eastern</tspan>
-            <tspan x="160" dy="1.2em">Canada</tspan>
+        <text class="formatted-text" x="160" y="136.8">
+            <tspan x="69.19999999999999" dy="-0.6em">Eastern</tspan>
+            <tspan x="69.19999999999999" dy="1.2em">Canada</tspan>
         </text>
 
-        <text x="1860" y="240">
+        <text class="formatted-text" x="1860" y="240">
             <tspan x="1860" dy="-0.6em">Western</tspan>
             <tspan x="1860" dy="1.2em">United States</tspan>
         </text>
-        <text x="1810" y="150">Alaska</text>
-        <text x="120" y="240">
-            <tspan x="120" dy="-0.6em">Eastern</tspan>
-            <tspan x="120" dy="1.2em">United States</tspan>
+        <text class="formatted-text" x="1810" y="150">Alaska</text>
+        <text class="formatted-text" x="120" y="260">
+            <tspan x="57.199999999999996" dy="-0.6em">Eastern</tspan>
+            <tspan x="57.199999999999996" dy="1.2em">United States</tspan>
         </text>
 
-        <text x="1880" y="330">
+        <text class="formatted-text" x="1880" y="330">
             <tspan x="1880" dy="-0.6em">Western</tspan>
             <tspan x="1880" dy="1.2em">Mexico</tspan>
         </text>
-        <text x="120" y="330">
-            <tspan x="120" dy="-0.6em">Eastern</tspan>
-            <tspan x="120" dy="1.2em">Mexico</tspan>
+        <text class="formatted-text" x="120" y="378.69565217391306">
+            <tspan x="15.349716446124745" dy="-0.6em">Eastern</tspan>
+            <tspan x="15.349716446124745" dy="1.2em">Mexico</tspan>
         </text>
 
-        <text x="500" y="120">Greenland</text>
-        <text x="217" y="294">Bermuda</text>
+        <text class="formatted-text" x="406.40000000000003" y="49.2">Greenland</text>
+        <text class="formatted-text" x="216.88629503518396" y="290.1340311962541">Bermuda</text>
 
         <!-- Central America (rolled back) -->
-        <text x="68" y="390">Guatemala</text>
-        <text x="68" y="404">Belize</text>
-        <text x="94" y="427">El Salvador</text>
-        <text x="99" y="415">Honduras</text>
-        <text x="100" y="405">Nicaragua</text>
-        <text x="96" y="445">Costa Rica</text>
-        <text x="130" y="450">Panama</text>
+        <text class="formatted-text" x="34.52525835815245" y="413.14464558830866">Guatemala</text>
+        <text class="formatted-text" x="81.72987450153903" y="394.5852289132304">Belize</text>
+        <text class="formatted-text" x="54.641026428921435" y="421.63881090892284">El Salvador</text>
+        <text class="formatted-text" x="80.56273995507614" y="408.72348594215356">Honduras</text>
+        <text class="formatted-text" x="110.19933534400043" y="422.1296529495393">Nicaragua</text>
+        <text class="formatted-text" x="77.03969711692228" y="445.7845642572309">Costa Rica</text>
+        <text class="formatted-text" x="111.32344785662077" y="460.54879334024196">Panama</text>
 
         <!-- Caribbean (visible, positioned near densest island clusters) -->
-        <text x="125" y="360">Cuba</text>
-        <text x="136" y="387">Jamaica</text>
-        <text x="166" y="374">Haiti</text>
-        <text x="172" y="386">Dominican Republic</text>
-        <text x="197" y="385">Puerto Rico</text>
-        <text x="155" y="350">Bahamas</text>
-        <text x="225" y="430">
-            <tspan x="225" dy="-0.6em">Trinidad &amp;</tspan>
-            <tspan x="225" dy="1.2em">Tobago</tspan>
+        <text class="formatted-text" x="105.77817569784534" y="350.58522891323037">Cuba</text>
+        <text class="formatted-text" x="128.0235967181535" y="392.36118909107716">Jamaica</text>
+        <text class="formatted-text" x="161.55413587569217" y="372.8231536141538">Haiti</text>
+        <text class="formatted-text" x="177.23042838153864" y="397.14592111014815">
+            <tspan x="176.544324486827" dy="-0.6em">Dominican</tspan>
+            <tspan x="176.544324486827" dy="1.2em">Republic</tspan>
+        </text>
+        <text class="formatted-text" x="204.71488186276957" y="381.07717871384597">Puerto Rico</text>
+        <text class="formatted-text" x="167.81454953476975" y="353.00749631938476">Bahamas</text>
+        <text class="formatted-text" x="225" y="436.4072747673849">
+            <tspan x="240.16824230646216" dy="-0.6em">Trinidad &amp;</tspan>
+            <tspan x="240.16824230646216" dy="1.2em">Tobago</tspan>
         </text>
 
         <!-- The Guianas (visible) -->
-        <text x="257" y="487">French Guiana</text>
-        <text x="242" y="475">Guyana</text>
-        <text x="261" y="465">Suriname</text>
+        <text class="formatted-text" x="289.16517313581977" y="467.2858616264331">French Guiana</text>
+        <text class="formatted-text" x="230.41362042957024" y="467.0451722352273">Guyana</text>
+        <text class="formatted-text" x="249.75948250629955" y="476.93224164715895">Suriname</text>
 
         <!-- South America north/west (visible) -->
-        <text x="235" y="465">Venezuela</text>
-        <text x="168" y="465">Colombia</text>
-        <text x="140" y="515">Ecuador</text>
-        <text x="170" y="560">Peru</text>
-        <text x="240" y="540">Bolivia</text>
+        <text class="formatted-text" x="194.87999909940757" y="454.7970687364873">Venezuela</text>
+        <text class="formatted-text" x="150.53396512517313" y="475.548793340242">Colombia</text>
+        <text class="formatted-text" x="122.80000000000001" y="512.2">Ecuador</text>
+        <text class="formatted-text" x="136.4" y="561.6">Peru</text>
+        <text class="formatted-text" x="206.4" y="616.8">Bolivia</text>
 
         <!-- Southern Cone (visible) -->
-        <text x="240" y="720">Argentina</text>
-        <text x="205" y="740">Chile</text>
-        <text x="280" y="720">Uruguay</text>
-        <text x="250" y="650">Paraguay</text>
+        <text class="formatted-text" x="219.7353497164461" y="720.9073724007561">Argentina</text>
+        <text class="formatted-text" x="195.92627599243855" y="798.9792060491494">Chile</text>
+        <text class="formatted-text" x="265.48204158790173" y="716.3705103969755">Uruguay</text>
+        <text class="formatted-text" x="242.7410207939509" y="651.5122873345936">Paraguay</text>
 
         <!-- Brazil (visible) -->
-        <text x="250" y="600">Brazil</text>
+        <text class="formatted-text" x="284.1776937618147" y="575.8034026465028">Brazil</text>
 
         <!-- South Atlantic islands (visible) -->
-        <text x="275" y="835">Falkland Islands</text>
+        <text class="formatted-text" x="291.94724175973295" y="826.0075860050397">Falkland Islands</text>
     </g>
 
 </svg>
