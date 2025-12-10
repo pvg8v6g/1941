@@ -4,444 +4,441 @@ namespace Library.Enumerations;
 
 public enum Territories
 {
-    [TerritoryInfo("", "United Kingdom", Faction.UnitedKingdom)]
+    [TerritoryInfo("United_Kingdom", "United Kingdom", Faction.UnitedKingdom)]
     UnitedKingdom,
 
-    [TerritoryInfo("", "Ireland", Faction.Neutral)]
+    [TerritoryInfo("Ireland", "Ireland", Faction.Neutral)]
     Ireland,
 
-    [TerritoryInfo("", "France", Faction.Germany)]
+    [TerritoryInfo("France", "France", Faction.Germany)]
     France,
 
-    [TerritoryInfo("", "Spain", Faction.Neutral)]
+    [TerritoryInfo("Spain", "Spain", Faction.Neutral)]
     Spain,
 
-    [TerritoryInfo("", "Portugal", Faction.UnitedKingdom)]
+    [TerritoryInfo("Portugal", "Portugal", Faction.UnitedKingdom)]
     Portugal,
 
-    [TerritoryInfo("", "Belgium", Faction.UnitedKingdom)]
+    [TerritoryInfo("Belgium", "Belgium", Faction.UnitedKingdom)]
     Belgium,
 
-    [TerritoryInfo("", "Netherlands", Faction.UnitedKingdom)]
+    [TerritoryInfo("Netherlands", "Netherlands", Faction.UnitedKingdom)]
     Netherlands,
 
-    [TerritoryInfo("", "Luxembourg", Faction.Germany)]
+    [TerritoryInfo("Luxembourg", "Luxembourg", Faction.Germany)]
     Luxembourg,
 
-    [TerritoryInfo("", "Switzerland", Faction.Neutral)]
+    [TerritoryInfo("Switzerland", "Switzerland", Faction.Neutral)]
     Switzerland,
 
-    [TerritoryInfo("", "Germany", Faction.Germany)]
+    [TerritoryInfo("Germany", "Germany", Faction.Germany)]
     Germany,
 
-    [TerritoryInfo("", "Austria", Faction.Germany)]
+    [TerritoryInfo("Austria", "Austria", Faction.Germany)]
     Austria,
 
-    [TerritoryInfo("", "Czechoslovakia", Faction.Germany)]
+    [TerritoryInfo("Czechoslovakia", "Czechoslovakia", Faction.Germany)]
     Czechoslovakia,
 
-    [TerritoryInfo("", "Hungary", Faction.Germany)]
+    [TerritoryInfo("Hungary", "Hungary", Faction.Germany)]
     Hungary,
 
-    [TerritoryInfo("", "Denmark", Faction.Germany)]
+    [TerritoryInfo("Denmark", "Denmark", Faction.Germany)]
     Denmark,
 
-    [TerritoryInfo("", "Norway", Faction.Germany)]
+    [TerritoryInfo("Norway", "Norway", Faction.Germany)]
     Norway,
 
-    [TerritoryInfo("", "Sweden", Faction.Neutral)]
+    [TerritoryInfo("Sweden", "Sweden", Faction.Neutral)]
     Sweden,
 
-    [TerritoryInfo("", "Finland", Faction.Germany)]
+    [TerritoryInfo("Finland", "Finland", Faction.Germany)]
     Finland,
 
-    [TerritoryInfo("", "Estonia", Faction.Russia)]
+    [TerritoryInfo("Estonia", "Estonia", Faction.Russia)]
     Estonia,
 
-    [TerritoryInfo("", "Latvia", Faction.Russia)]
+    [TerritoryInfo("Latvia", "Latvia", Faction.Russia)]
     Latvia,
 
-    [TerritoryInfo("", "Lithuania", Faction.Russia)]
+    [TerritoryInfo("Lithuania", "Lithuania", Faction.Russia)]
     Lithuania,
 
-    [TerritoryInfo("", "Poland", Faction.Germany)]
+    [TerritoryInfo("Poland", "Poland", Faction.Germany)]
     Poland,
 
-    [TerritoryInfo("", "Yugoslavia", Faction.Germany)]
+    [TerritoryInfo("Yugoslavia", "Yugoslavia", Faction.Germany)]
     Yugoslavia,
 
-    [TerritoryInfo("", "Romania", Faction.Germany)]
+    [TerritoryInfo("Romania", "Romania", Faction.Germany)]
     Romania,
 
-    [TerritoryInfo("", "Bulgaria", Faction.Germany)]
+    [TerritoryInfo("Bulgaria", "Bulgaria", Faction.Germany)]
     Bulgaria,
 
-    [TerritoryInfo("", "Albania", Faction.Italy)]
+    [TerritoryInfo("Albania", "Albania", Faction.Italy)]
     Albania,
 
-    [TerritoryInfo("", "Greece", Faction.Germany)]
+    [TerritoryInfo("Greece", "Greece", Faction.Germany)]
     Greece,
 
-    [TerritoryInfo("", "Turkey", Faction.Neutral)]
+    [TerritoryInfo("Turkey", "Turkey", Faction.Neutral)]
     Turkey,
 
-    [TerritoryInfo("", "Soviet Union", Faction.Russia)]
+    [TerritoryInfo("Soviet_Union", "Soviet Union", Faction.Russia)]
     SovietUnion,
 
-    [TerritoryInfo("", "Morocco", Faction.Germany)]
+    [TerritoryInfo("Morocco", "Morocco", Faction.Germany)]
     Morocco,
 
-    [TerritoryInfo("", "Western Sahara", Faction.Neutral)]
+    [TerritoryInfo("Western_Sahara", "Western Sahara", Faction.Neutral)]
     WesternSahara,
 
-    [TerritoryInfo("", "Algeria", Faction.Germany)]
+    [TerritoryInfo("Algeria", "Algeria", Faction.Germany)]
     Algeria,
 
-    [TerritoryInfo("", "Tunisia", Faction.Germany)]
+    [TerritoryInfo("Tunisia", "Tunisia", Faction.Germany)]
     Tunisia,
 
-    [TerritoryInfo("", "Libya", Faction.Italy)]
+    [TerritoryInfo("Libya", "Libya", Faction.Italy)]
     Libya,
 
-    [TerritoryInfo("", "Egypt", Faction.UnitedKingdom)]
+    [TerritoryInfo("Egypt", "Egypt", Faction.UnitedKingdom)]
     Egypt,
 
-    [TerritoryInfo("", "Syria", Faction.Germany)]
+    [TerritoryInfo("Syria", "Syria", Faction.Germany)]
     Syria,
 
-    [TerritoryInfo("", "Lebanon", Faction.Germany)]
+    [TerritoryInfo("Lebanon", "Lebanon", Faction.Germany)]
     Lebanon,
 
-    [TerritoryInfo("", "Palestine", Faction.UnitedKingdom)]
+    [TerritoryInfo("Palestine", "Palestine", Faction.UnitedKingdom)]
     Palestine,
 
-    [TerritoryInfo("", "Transjordan", Faction.UnitedKingdom)]
+    [TerritoryInfo("Transjordan", "Transjordan", Faction.UnitedKingdom)]
     Transjordan,
 
-    [TerritoryInfo("", "Iraq", Faction.UnitedKingdom)]
+    [TerritoryInfo("Iraq", "Iraq", Faction.UnitedKingdom)]
     Iraq,
 
-    [TerritoryInfo("", "Persia", Faction.UnitedKingdom)]
+    [TerritoryInfo("Persia", "Persia", Faction.UnitedKingdom)]
     Persia,
 
-    [TerritoryInfo("", "Kuwait", Faction.UnitedKingdom)]
+    [TerritoryInfo("Kuwait", "Kuwait", Faction.UnitedKingdom)]
     Kuwait,
 
-    [TerritoryInfo("", "Bahrain", Faction.UnitedKingdom)]
+    [TerritoryInfo("Bahrain", "Bahrain", Faction.UnitedKingdom)]
     Bahrain,
 
-    [TerritoryInfo("", "Qatar", Faction.UnitedKingdom)]
+    [TerritoryInfo("Qatar", "Qatar", Faction.UnitedKingdom)]
     Qatar,
 
-    [TerritoryInfo("", "Trucial States", Faction.UnitedKingdom)]
+    [TerritoryInfo("Trucial_States", "Trucial States", Faction.UnitedKingdom)]
     TrucialStates,
 
-    [TerritoryInfo("", "Oman", Faction.UnitedKingdom)]
+    [TerritoryInfo("Oman", "Oman", Faction.UnitedKingdom)]
     Oman,
 
-    [TerritoryInfo("", "Yemen", Faction.Neutral)]
+    [TerritoryInfo("Yemen", "Yemen", Faction.Neutral)]
     Yemen,
 
-    [TerritoryInfo("", "Saudi Arabia", Faction.Neutral)]
+    [TerritoryInfo("Saudi_Arabia", "Saudi Arabia", Faction.Neutral)]
     SaudiArabia,
 
-    [TerritoryInfo("", "Sudan", Faction.UnitedKingdom)]
+    [TerritoryInfo("Sudan", "Sudan", Faction.UnitedKingdom)]
     Sudan,
 
-    [TerritoryInfo("", "Eritrea", Faction.UnitedKingdom)]
+    [TerritoryInfo("Eritrea", "Eritrea", Faction.UnitedKingdom)]
     Eritrea,
 
-    [TerritoryInfo("", "Ethiopia", Faction.UnitedKingdom)]
+    [TerritoryInfo("Ethiopia", "Ethiopia", Faction.UnitedKingdom)]
     Ethiopia,
 
-    [TerritoryInfo("", "Djibouti", Faction.UnitedKingdom)]
+    [TerritoryInfo("Djibouti", "Djibouti", Faction.UnitedKingdom)]
     Djibouti,
 
-    [TerritoryInfo("", "Somalia", Faction.UnitedKingdom)]
+    [TerritoryInfo("Somalia", "Somalia", Faction.UnitedKingdom)]
     Somalia,
 
-    [TerritoryInfo("", "Senegal", Faction.Germany)]
+    [TerritoryInfo("Senegal", "Senegal", Faction.Germany)]
     Senegal,
 
-    [TerritoryInfo("", "The Gambia", Faction.UnitedKingdom)]
+    [TerritoryInfo("The_Gambia", "The Gambia", Faction.UnitedKingdom)]
     TheGambia,
 
-    [TerritoryInfo("", "Guinea â Bissau", Faction.UnitedKingdom)]
+    [TerritoryInfo("Guinea_â_Bissau", "Guinea â Bissau", Faction.UnitedKingdom)]
     GuineaâBissau,
 
-    [TerritoryInfo("", "Guinea", Faction.Germany)]
+    [TerritoryInfo("Guinea", "Guinea", Faction.Germany)]
     Guinea,
 
-    [TerritoryInfo("", "Sierra Leone", Faction.UnitedKingdom)]
+    [TerritoryInfo("Sierra_Leone", "Sierra Leone", Faction.UnitedKingdom)]
     SierraLeone,
 
-    [TerritoryInfo("", "Liberia", Faction.Neutral)]
+    [TerritoryInfo("Liberia", "Liberia", Faction.Neutral)]
     Liberia,
 
-    [TerritoryInfo("", "CÃted Ivoire", Faction.Germany)]
+    [TerritoryInfo("CÃted_Ivoire", "CÃted Ivoire", Faction.Germany)]
     CÃtedIvoire,
 
-    [TerritoryInfo("", "Ghana", Faction.UnitedKingdom)]
+    [TerritoryInfo("Ghana", "Ghana", Faction.UnitedKingdom)]
     Ghana,
 
-    [TerritoryInfo("", "Togo", Faction.Germany)]
+    [TerritoryInfo("Togo", "Togo", Faction.Germany)]
     Togo,
 
-    [TerritoryInfo("", "Benin", Faction.Germany)]
+    [TerritoryInfo("Benin", "Benin", Faction.Germany)]
     Benin,
 
-    [TerritoryInfo("", "Burkina Faso", Faction.Germany)]
+    [TerritoryInfo("Burkina_Faso", "Burkina Faso", Faction.Germany)]
     BurkinaFaso,
 
-    [TerritoryInfo("", "Mali", Faction.Germany)]
+    [TerritoryInfo("Mali", "Mali", Faction.Germany)]
     Mali,
 
-    [TerritoryInfo("", "Mauritania", Faction.Germany)]
+    [TerritoryInfo("Mauritania", "Mauritania", Faction.Germany)]
     Mauritania,
 
-    [TerritoryInfo("", "Niger", Faction.Germany)]
+    [TerritoryInfo("Niger", "Niger", Faction.Germany)]
     Niger,
 
-    [TerritoryInfo("", "Central African Republic", Faction.Germany)]
+    [TerritoryInfo("Central_African_Republic", "Central African Republic", Faction.Germany)]
     CentralAfricanRepublic,
 
-    [TerritoryInfo("", "Cameroon", Faction.Germany)]
+    [TerritoryInfo("Cameroon", "Cameroon", Faction.Germany)]
     Cameroon,
 
-    [TerritoryInfo("", "Equatorial Guinea", Faction.Neutral)]
+    [TerritoryInfo("Equatorial_Guinea", "Equatorial Guinea", Faction.Neutral)]
     EquatorialGuinea,
 
-    [TerritoryInfo("", "Gabon", Faction.Germany)]
+    [TerritoryInfo("Gabon", "Gabon", Faction.Germany)]
     Gabon,
 
-    [TerritoryInfo("", "Republic of the Congo", Faction.Germany)]
+    [TerritoryInfo("Republic_of_the_Congo", "Republic of the Congo", Faction.Germany)]
     RepublicoftheCongo,
 
-    [TerritoryInfo("", "Belgian Congo", Faction.UnitedKingdom)]
+    [TerritoryInfo("Belgian_Congo", "Belgian Congo", Faction.UnitedKingdom)]
     BelgianCongo,
 
-    [TerritoryInfo("", "Angola", Faction.UnitedKingdom)]
+    [TerritoryInfo("Angola", "Angola", Faction.UnitedKingdom)]
     Angola,
 
-    [TerritoryInfo("", "Zambia", Faction.UnitedKingdom)]
+    [TerritoryInfo("Zambia", "Zambia", Faction.UnitedKingdom)]
     Zambia,
 
-    [TerritoryInfo("", "Malawi", Faction.UnitedKingdom)]
+    [TerritoryInfo("Malawi", "Malawi", Faction.UnitedKingdom)]
     Malawi,
 
-    [TerritoryInfo("", "Mozambique", Faction.UnitedKingdom)]
+    [TerritoryInfo("Mozambique", "Mozambique", Faction.UnitedKingdom)]
     Mozambique,
 
-    [TerritoryInfo("", "Namibia", Faction.UnitedKingdom)]
+    [TerritoryInfo("Namibia", "Namibia", Faction.UnitedKingdom)]
     Namibia,
 
-    [TerritoryInfo("", "Botswana", Faction.UnitedKingdom)]
+    [TerritoryInfo("Botswana", "Botswana", Faction.UnitedKingdom)]
     Botswana,
 
-    [TerritoryInfo("", "Zimbabwe", Faction.UnitedKingdom)]
+    [TerritoryInfo("Zimbabwe", "Zimbabwe", Faction.UnitedKingdom)]
     Zimbabwe,
 
-    [TerritoryInfo("", "South Africa", Faction.UnitedKingdom)]
+    [TerritoryInfo("South_Africa", "South Africa", Faction.UnitedKingdom)]
     SouthAfrica,
 
-    [TerritoryInfo("", "Lesotho", Faction.UnitedKingdom)]
-    Lesotho,
-
-    [TerritoryInfo("", "Swaziland", Faction.UnitedKingdom)]
+    [TerritoryInfo("Swaziland", "Swaziland", Faction.UnitedKingdom)]
     Swaziland,
 
-    [TerritoryInfo("", "Madagascar", Faction.Germany)]
+    [TerritoryInfo("Madagascar", "Madagascar", Faction.Germany)]
     Madagascar,
 
-    [TerritoryInfo("", "Cape Verde", Faction.UnitedKingdom)]
+    [TerritoryInfo("Cape_Verde", "Cape Verde", Faction.UnitedKingdom)]
     CapeVerde,
 
-    [TerritoryInfo("", "Afghanistan", Faction.Neutral)]
+    [TerritoryInfo("Afghanistan", "Afghanistan", Faction.Neutral)]
     Afghanistan,
 
-    [TerritoryInfo("", "British India", Faction.UnitedKingdom)]
+    [TerritoryInfo("British_India", "British India", Faction.UnitedKingdom)]
     BritishIndia,
 
-    [TerritoryInfo("", "Nepal", Faction.UnitedKingdom)]
+    [TerritoryInfo("Nepal", "Nepal", Faction.UnitedKingdom)]
     Nepal,
 
-    [TerritoryInfo("", "Bhutan", Faction.UnitedKingdom)]
+    [TerritoryInfo("Bhutan", "Bhutan", Faction.UnitedKingdom)]
     Bhutan,
 
-    [TerritoryInfo("", "Ceylon", Faction.UnitedKingdom)]
+    [TerritoryInfo("Ceylon", "Ceylon", Faction.UnitedKingdom)]
     Ceylon,
 
-    [TerritoryInfo("", "China", Faction.China)]
+    [TerritoryInfo("China", "China", Faction.China)]
     China,
 
-    [TerritoryInfo("", "Mongolia", Faction.Russia)]
+    [TerritoryInfo("Mongolia", "Mongolia", Faction.Russia)]
     Mongolia,
 
-    [TerritoryInfo("", "Korea", Faction.Japan)]
+    [TerritoryInfo("Korea", "Korea", Faction.Japan)]
     Korea,
 
-    [TerritoryInfo("", "Formosa", Faction.Japan)]
+    [TerritoryInfo("Formosa", "Formosa", Faction.Japan)]
     Formosa,
 
-    [TerritoryInfo("", "Japan", Faction.Japan)]
+    [TerritoryInfo("Japan", "Japan", Faction.Japan)]
     Japan,
 
-    [TerritoryInfo("", "Burma", Faction.UnitedKingdom)]
+    [TerritoryInfo("Burma", "Burma", Faction.UnitedKingdom)]
     Burma,
 
-    [TerritoryInfo("", "French Indochina", Faction.Japan)]
+    [TerritoryInfo("French_Indochina", "French Indochina", Faction.Japan)]
     FrenchIndochina,
 
-    [TerritoryInfo("", "Siam", Faction.Neutral)]
+    [TerritoryInfo("Siam", "Siam", Faction.Neutral)]
     Siam,
 
-    [TerritoryInfo("", "British Malaya", Faction.UnitedKingdom)]
+    [TerritoryInfo("British_Malaya", "British Malaya", Faction.UnitedKingdom)]
     BritishMalaya,
 
-    [TerritoryInfo("", "Philippines", Faction.UnitedStates)]
+    [TerritoryInfo("Philippines", "Philippines", Faction.UnitedStates)]
     Philippines,
 
-    [TerritoryInfo("", "Netherlands East Indies", Faction.UnitedKingdom)]
+    [TerritoryInfo("Netherlands_East_Indies", "Netherlands East Indies", Faction.UnitedKingdom)]
     NetherlandsEastIndies,
 
-    [TerritoryInfo("", "Hong Kong", Faction.UnitedKingdom)]
+    [TerritoryInfo("Hong_Kong", "Hong Kong", Faction.UnitedKingdom)]
     HongKong,
 
-    [TerritoryInfo("", "Macau", Faction.UnitedKingdom)]
+    [TerritoryInfo("Macau", "Macau", Faction.UnitedKingdom)]
     Macau,
 
-    [TerritoryInfo("", "Australia", Faction.Australia)]
+    [TerritoryInfo("Australia", "Australia", Faction.Australia)]
     Australia,
 
-    [TerritoryInfo("", "New Zealand", Faction.Australia)]
+    [TerritoryInfo("New_Zealand", "New Zealand", Faction.Australia)]
     NewZealand,
 
-    [TerritoryInfo("", "New Guinea", Faction.Australia)]
+    [TerritoryInfo("New_Guinea", "New Guinea", Faction.Australia)]
     NewGuinea,
 
-    [TerritoryInfo("", "Solomon Islands", Faction.Australia)]
+    [TerritoryInfo("Solomon_Islands", "Solomon Islands", Faction.Australia)]
     SolomonIslands,
 
-    [TerritoryInfo("", "New Caledonia", Faction.UnitedKingdom)]
+    [TerritoryInfo("New_Caledonia", "New Caledonia", Faction.UnitedKingdom)]
     NewCaledonia,
 
-    [TerritoryInfo("", "Fiji", Faction.Australia)]
+    [TerritoryInfo("Fiji", "Fiji", Faction.Australia)]
     Fiji,
 
-    [TerritoryInfo("", "Hawaiian Islands", Faction.UnitedStates)]
+    [TerritoryInfo("Hawaiian_Islands", "Hawaiian Islands", Faction.UnitedStates)]
     HawaiianIslands,
 
-    [TerritoryInfo("", "Papua", Faction.Australia)]
+    [TerritoryInfo("Papua", "Papua", Faction.Australia)]
     Papua,
 
-    [TerritoryInfo("", "Western Canada", Faction.UnitedKingdom)]
+    [TerritoryInfo("Western_Canada", "Western Canada", Faction.UnitedKingdom)]
     WesternCanada,
 
-    [TerritoryInfo("", "Eastern Canada", Faction.UnitedKingdom)]
+    [TerritoryInfo("Eastern_Canada", "Eastern Canada", Faction.UnitedKingdom)]
     EasternCanada,
 
-    [TerritoryInfo("", "Western United States", Faction.UnitedStates)]
+    [TerritoryInfo("Western_United_States", "Western United States", Faction.UnitedStates)]
     WesternUnitedStates,
 
-    [TerritoryInfo("", "Alaska", Faction.UnitedStates)]
+    [TerritoryInfo("Alaska", "Alaska", Faction.UnitedStates)]
     Alaska,
 
-    [TerritoryInfo("", "Eastern United States", Faction.UnitedStates)]
+    [TerritoryInfo("Eastern_United_States", "Eastern United States", Faction.UnitedStates)]
     EasternUnitedStates,
 
-    [TerritoryInfo("", "Western Mexico", Faction.Neutral)]
+    [TerritoryInfo("Western_Mexico", "Western Mexico", Faction.Neutral)]
     WesternMexico,
 
-    [TerritoryInfo("", "Eastern Mexico", Faction.Neutral)]
+    [TerritoryInfo("Eastern_Mexico", "Eastern Mexico", Faction.Neutral)]
     EasternMexico,
 
-    [TerritoryInfo("", "Greenland", Faction.UnitedStates)]
+    [TerritoryInfo("Greenland", "Greenland", Faction.UnitedStates)]
     Greenland,
 
-    [TerritoryInfo("", "Bermuda", Faction.UnitedKingdom)]
+    [TerritoryInfo("Bermuda", "Bermuda", Faction.UnitedKingdom)]
     Bermuda,
 
-    [TerritoryInfo("", "Guatemala", Faction.Neutral)]
+    [TerritoryInfo("Guatemala", "Guatemala", Faction.Neutral)]
     Guatemala,
 
-    [TerritoryInfo("", "Belize", Faction.UnitedKingdom)]
+    [TerritoryInfo("Belize", "Belize", Faction.UnitedKingdom)]
     Belize,
 
-    [TerritoryInfo("", "El Salvador", Faction.Neutral)]
+    [TerritoryInfo("El_Salvador", "El Salvador", Faction.Neutral)]
     ElSalvador,
 
-    [TerritoryInfo("", "Honduras", Faction.Neutral)]
+    [TerritoryInfo("Honduras", "Honduras", Faction.Neutral)]
     Honduras,
 
-    [TerritoryInfo("", "Nicaragua", Faction.Neutral)]
+    [TerritoryInfo("Nicaragua", "Nicaragua", Faction.Neutral)]
     Nicaragua,
 
-    [TerritoryInfo("", "Costa Rica", Faction.Neutral)]
+    [TerritoryInfo("Costa_Rica", "Costa Rica", Faction.Neutral)]
     CostaRica,
 
-    [TerritoryInfo("", "Panama", Faction.Neutral)]
+    [TerritoryInfo("Panama", "Panama", Faction.Neutral)]
     Panama,
 
-    [TerritoryInfo("", "Cuba", Faction.Neutral)]
+    [TerritoryInfo("Cuba", "Cuba", Faction.Neutral)]
     Cuba,
 
-    [TerritoryInfo("", "Jamaica", Faction.UnitedKingdom)]
+    [TerritoryInfo("Jamaica", "Jamaica", Faction.UnitedKingdom)]
     Jamaica,
 
-    [TerritoryInfo("", "Haiti", Faction.Neutral)]
+    [TerritoryInfo("Haiti", "Haiti", Faction.Neutral)]
     Haiti,
 
-    [TerritoryInfo("", "Dominican Republic", Faction.Neutral)]
+    [TerritoryInfo("Dominican_Republic", "Dominican Republic", Faction.Neutral)]
     DominicanRepublic,
 
-    [TerritoryInfo("", "Puerto Rico", Faction.UnitedStates)]
+    [TerritoryInfo("Puerto_Rico", "Puerto Rico", Faction.UnitedStates)]
     PuertoRico,
 
-    [TerritoryInfo("", "Bahamas", Faction.UnitedKingdom)]
+    [TerritoryInfo("Bahamas", "Bahamas", Faction.UnitedKingdom)]
     Bahamas,
 
-    [TerritoryInfo("", "Trinidad Tobago", Faction.UnitedKingdom)]
+    [TerritoryInfo("Trinidad_Tobago", "Trinidad Tobago", Faction.UnitedKingdom)]
     TrinidadTobago,
 
-    [TerritoryInfo("", "French Guiana", Faction.Germany)]
+    [TerritoryInfo("French_Guiana", "French Guiana", Faction.Germany)]
     FrenchGuiana,
 
-    [TerritoryInfo("", "Guyana", Faction.UnitedKingdom)]
+    [TerritoryInfo("Guyana", "Guyana", Faction.UnitedKingdom)]
     Guyana,
 
-    [TerritoryInfo("", "Suriname", Faction.UnitedKingdom)]
+    [TerritoryInfo("Suriname", "Suriname", Faction.UnitedKingdom)]
     Suriname,
 
-    [TerritoryInfo("", "Venezuela", Faction.Neutral)]
+    [TerritoryInfo("Venezuela", "Venezuela", Faction.Neutral)]
     Venezuela,
 
-    [TerritoryInfo("", "Colombia", Faction.Neutral)]
+    [TerritoryInfo("Colombia", "Colombia", Faction.Neutral)]
     Colombia,
 
-    [TerritoryInfo("", "Ecuador", Faction.Neutral)]
+    [TerritoryInfo("Ecuador", "Ecuador", Faction.Neutral)]
     Ecuador,
 
-    [TerritoryInfo("", "Peru", Faction.Neutral)]
+    [TerritoryInfo("Peru", "Peru", Faction.Neutral)]
     Peru,
 
-    [TerritoryInfo("", "Bolivia", Faction.Neutral)]
+    [TerritoryInfo("Bolivia", "Bolivia", Faction.Neutral)]
     Bolivia,
 
-    [TerritoryInfo("", "Argentina", Faction.Neutral)]
+    [TerritoryInfo("Argentina", "Argentina", Faction.Neutral)]
     Argentina,
 
-    [TerritoryInfo("", "Chile", Faction.Neutral)]
+    [TerritoryInfo("Chile", "Chile", Faction.Neutral)]
     Chile,
 
-    [TerritoryInfo("", "Uruguay", Faction.Neutral)]
+    [TerritoryInfo("Uruguay", "Uruguay", Faction.Neutral)]
     Uruguay,
 
-    [TerritoryInfo("", "Paraguay", Faction.Neutral)]
+    [TerritoryInfo("Paraguay", "Paraguay", Faction.Neutral)]
     Paraguay,
 
-    [TerritoryInfo("", "Brazil", Faction.Neutral)]
+    [TerritoryInfo("Brazil", "Brazil", Faction.Neutral)]
     Brazil,
 
-    [TerritoryInfo("", "Falkland Islands", Faction.UnitedKingdom)]
+    [TerritoryInfo("Falkland_Islands", "Falkland Islands", Faction.UnitedKingdom)]
     FalklandIslands
 }
