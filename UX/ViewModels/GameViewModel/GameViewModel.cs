@@ -238,55 +238,8 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         var px = (int) Math.Clamp(x, 0, _hitmapBitmap.Width - 1);
         var py = (int) Math.Clamp(y, 0, _hitmapBitmap.Height - 1);
         var color = _hitmapBitmap.GetPixel(px, py);
-
-        // exact match first
-        if (_hitColorToClass.TryGetValue(new SKColor(color.Red, color.Green, color.Blue, 255), out var cls))
-        {
-            HoveredClass = cls;
-            return;
-        }
-
-        // small neighborhood scan to beat anti-aliasing at edges
-        for (var dy = -1; dy <= 1; dy++)
-        {
-            var yy = py + dy;
-            if (yy < 0 || yy >= _hitmapBitmap.Height) continue;
-            for (var dx = -1; dx <= 1; dx++)
-            {
-                var xx = px + dx;
-                if (xx < 0 || xx >= _hitmapBitmap.Width) continue;
-                var c2 = _hitmapBitmap.GetPixel(xx, yy);
-                if (!_hitColorToClass.TryGetValue(new SKColor(c2.Red, c2.Green, c2.Blue, 255), out var cls2)) continue;
-                HoveredClass = cls2;
-                return;
-            }
-        }
-
-        // nearest-color fallback with a reasonable threshold (to cope with blended pixels)
-        string? bestClass = null;
-        var bestDist = int.MaxValue;
-        int r = color.Red, g = color.Green, b = color.Blue;
-        foreach (var (hc, value) in _hitColorToClass)
-        {
-            var dr = r - hc.Red;
-            var dg = g - hc.Green;
-            var db = b - hc.Blue;
-            var d2 = dr * dr + dg * dg + db * db;
-            if (d2 >= bestDist) continue;
-            bestDist = d2;
-            bestClass = value;
-            if (bestDist == 0) break;
-        }
-
-        // Accept only if within threshold to avoid false positives on transparent/background
-        if (bestClass != null && bestDist <= 400) // <= 20 units in RGB space
-        {
-            HoveredClass = bestClass;
-        }
-        else
-        {
-            HoveredClass = null;
-        }
+        // exact match only; hitmap is rendered crisp/no-stroke, so borders are exact
+        HoveredClass = _hitColorToClass.GetValueOrDefault(new SKColor(color.Red, color.Green, color.Blue, 255));
     }
 
     private void ClearHover()
@@ -335,6 +288,8 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
 
         // Create svg with these fills
         var hitSvgXml = SvgClassColorService.ApplyClassFills(_worldSvgXmlOriginal!, _classToHitColor);
+        // Inject global crisp, no-stroke rules specifically for the hitmap to avoid anti-aliasing at edges
+        hitSvgXml = InjectHitmapCrispStyles(hitSvgXml);
         var svg = new SKSvg();
         using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(hitSvgXml)))
         {
@@ -351,7 +306,11 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         using var canvas = new SKCanvas(_hitmapBitmap);
         canvas.Clear(SKColors.Transparent);
         canvas.Scale(DrawScale);
-        canvas.DrawPicture(svg.Picture);
+        // Draw with AA disabled to keep pick colors exact
+        using var paint = new SKPaint();
+        paint.IsAntialias = false;
+        paint.IsDither = false;
+        canvas.DrawPicture(svg.Picture, paint);
     }
 
     #endregion
@@ -463,6 +422,53 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
             .Where(info => string.Equals(info.Key, classKey, StringComparison.OrdinalIgnoreCase))
             .Select(info => info.Name.IsNullOrWhiteSpace() ? info.Key.Replace('_', ' ') : info.Name)
             .FirstOrDefault();
+    }
+
+    private static string InjectHitmapCrispStyles(string svgXml)
+    {
+        if (string.IsNullOrWhiteSpace(svgXml)) return svgXml;
+
+        // Ensure the root <svg> has shape-rendering="crispEdges"
+        var idxSvg = svgXml.IndexOf("<svg", StringComparison.OrdinalIgnoreCase);
+        if (idxSvg >= 0)
+        {
+            var endTag = svgXml.IndexOf('>', idxSvg);
+            if (endTag > idxSvg)
+            {
+                var openTag = svgXml.Substring(idxSvg, endTag - idxSvg + 1);
+                if (!openTag.Contains("shape-rendering", StringComparison.OrdinalIgnoreCase))
+                {
+                    var withoutGt = openTag.TrimEnd('>');
+                    var selfClosing = withoutGt.EndsWith("/");
+                    if (selfClosing)
+                    {
+                        withoutGt = withoutGt.Substring(0, withoutGt.Length - 1);
+                    }
+
+                    if (!withoutGt.EndsWith(" "))
+                        withoutGt += " ";
+
+                    withoutGt += "shape-rendering=\"crispEdges\"";
+
+                    var rebuilt = withoutGt + (selfClosing ? " />" : ">");
+
+                    svgXml = svgXml.Remove(idxSvg, endTag - idxSvg + 1)
+                        .Insert(idxSvg, rebuilt);
+                }
+            }
+        }
+
+        // Inject a dedicated style block after the opening <svg ...>
+        var svgOpenEnd = svgXml.IndexOf('>', idxSvg >= 0 ? idxSvg : 0);
+        if (svgOpenEnd >= 0)
+        {
+            // Keep fills opaque and remove strokes; avoid adding shape-rendering here to keep CSS valid across parsers
+            const string styleBlock =
+                "\n<style type=\"text/css\"><![CDATA[\n/* hitmap rules */\n*{ stroke:none !important; fill-opacity:1 !important; }\n]]></style>\n";
+            svgXml = svgXml.Insert(svgOpenEnd + 1, styleBlock);
+        }
+
+        return svgXml;
     }
 
     #endregion

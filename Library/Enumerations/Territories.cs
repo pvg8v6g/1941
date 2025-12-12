@@ -22,8 +22,11 @@ public enum Territories
     [TerritoryInfo("China", "China", Faction.China)]
     China,
 
-    [TerritoryInfo("Korea", "Korea", Faction.Japan)]
-    Korea,
+    [TerritoryInfo("South Korea", "South Korea", Faction.Japan)]
+    SouthKorea,
+
+    [TerritoryInfo("North Korea", "North Korea", Faction.Japan)]
+    NorthKorea,
 
     [TerritoryInfo("Formosa", "Formosa", Faction.Japan)]
     Formosa,
@@ -77,6 +80,42 @@ public enum Territories
     Papua,
 
     #region Europe
+
+    [TerritoryInfo("Czech_Republic", "Czech Republic", Faction.Germany)]
+    CzechRepublic,
+
+    [TerritoryInfo("Belarus", "Belarus", Faction.Germany)]
+    Belarus,
+
+    [TerritoryInfo("Ukraine", "Ukraine", Faction.Germany)]
+    Ukraine,
+
+    [TerritoryInfo("Slovakia", "Slovakia", Faction.Germany)]
+    Slovakia,
+
+    [TerritoryInfo("Moldova", "Moldova", Faction.Germany)]
+    Moldova,
+
+    [TerritoryInfo("Serbia", "Serbia", Faction.Germany)]
+    Serbia,
+
+    [TerritoryInfo("Macedonia", "Macedonia", Faction.Germany)]
+    Macedonia,
+
+    [TerritoryInfo("Kosovo", "Kosovo", Faction.Germany)]
+    Kosovo,
+
+    [TerritoryInfo("Montenegro", "Montenegro", Faction.Germany)]
+    Montenegro,
+
+    [TerritoryInfo("Bosnia_and_Herzegovina", "Bosnia And Herzegovina", Faction.Germany)]
+    BosniaHerzegovina,
+
+    [TerritoryInfo("Croatia", "Croatia", Faction.Germany)]
+    Croatia,
+
+    [TerritoryInfo("Slovenia", "Slovenia", Faction.Germany)]
+    Slovenia,
 
     [TerritoryInfo("United_Kingdom", "United Kingdom", Faction.UnitedKingdom)]
     UnitedKingdom,
@@ -165,6 +204,12 @@ public enum Territories
     #endregion
 
     #region Middle East
+
+    [TerritoryInfo("Israel", "Israel", Faction.UnitedKingdom)]
+    Israel,
+
+    [TerritoryInfo("Jordan", "Jordan", Faction.UnitedKingdom)]
+    Jordan,
 
     [TerritoryInfo("Turkey", "Turkey", Faction.Neutral)]
     Turkey,
