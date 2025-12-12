@@ -10,7 +10,7 @@ public enum Faction
     [FactionColor("#5f6575")]
     Germany,
 
-    [FactionColor("#69001b")]
+    [FactionColor("#29846f")]
     Italy,
 
     [FactionColor("#4169e1")]
@@ -28,6 +28,6 @@ public enum Faction
     [FactionColor("#438f43")]
     UnitedStates,
 
-    [FactionColor("#ffffff")]
+    [FactionColor("#e2acc1")]
     Neutral
 }

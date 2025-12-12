@@ -49,12 +49,25 @@
                            behaviors:InvalidateBehavior.Trigger="{Binding}"
                            behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
                            IsHitTestVisible="False" />
-            <wpf:SKElement Width="{Binding MapWidth}"
-                           Height="{Binding MapHeight}"
-                           behaviors:PaintSurfaceBehavior.Command="{Binding PaintLabelsSurfaceCommand}"
-                           behaviors:InvalidateBehavior.Trigger="{Binding}"
-                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
-                           IsHitTestVisible="False" />
+            <!-- <wpf:SKElement Width="{Binding MapWidth}" -->
+            <!--                Height="{Binding MapHeight}" -->
+            <!--                behaviors:PaintSurfaceBehavior.Command="{Binding PaintLabelsSurfaceCommand}" -->
+            <!--                behaviors:InvalidateBehavior.Trigger="{Binding}" -->
+            <!--                behaviors:InvalidateBehavior.PropertyName="InvalidateRequested" -->
+            <!--                IsHitTestVisible="False" /> -->
+            <!-- Delayed tooltip that shows HoveredClass after ~4s and stays ~5s or until hover changes -->
+            <Popup IsOpen="{Binding TooltipIsOpen, Mode=OneWay}"
+                   PlacementTarget="{Binding ElementName=MapGrid}"
+                   Placement="Relative"
+                   HorizontalOffset="{Binding TooltipX}"
+                   VerticalOffset="{Binding TooltipY}"
+                   AllowsTransparency="True"
+                   StaysOpen="True"
+                   Focusable="False">
+                <Border Background="#CC1E1E1E" Padding="12" CornerRadius="4" BorderBrush="#AAFFFFFF" BorderThickness="1">
+                    <TextBlock Text="{Binding TooltipText}" Foreground="White" FontSize="16" FontWeight="SemiBold" />
+                </Border>
+            </Popup>
         </Grid>
     </ScrollViewer>
 </UserControl>

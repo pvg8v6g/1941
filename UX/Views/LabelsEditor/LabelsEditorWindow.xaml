@@ -1,0 +1,64 @@
+﻿<Window x:Class="UX.Views.LabelsEditor.LabelsEditorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:behaviors="clr-namespace:Library.Behaviors;assembly=Library"
+        xmlns:wpf="clr-namespace:SkiaSharp.Views.WPF;assembly=SkiaSharp.Views.WPF"
+        xmlns:vm="clr-namespace:UX.ViewModels.LabelsEditorViewModel"
+        mc:Ignorable="d"
+        Title="Labels Editor (temporary tool)"
+        Width="1400"
+        Height="900"
+        Background="#202020"
+        behaviors:LoadedBehavior.LoadedCommand="{Binding LoadedCommand}"
+        d:DataContext="{d:DesignInstance vm:LabelsEditorViewModel}">
+    <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                  VerticalScrollBarVisibility="Auto"
+                  PanningMode="None"
+                  CanContentScroll="False"
+                  ClipToBounds="True"
+                  Background="Transparent">
+        <i:Interaction.Behaviors>
+            <behaviors:PanZoomScrollBehavior
+                TargetElement="{Binding ElementName=MapGrid}"
+                EdgeHideMargin="0,0,0,0"
+                MinScale="0.2"
+                MaxScale="8"
+                WheelZoomFactor="1.15" />
+        </i:Interaction.Behaviors>
+        <Grid x:Name="MapGrid"
+              Width="{Binding MapWidth}"
+              Height="{Binding MapHeight}"
+              Background="Transparent"
+              MouseDown="OnMapMouseDown"
+              MouseMove="OnMapMouseMove"
+              MouseUp="OnMapMouseUp">
+            <wpf:SKElement Width="{Binding MapWidth}"
+                           Height="{Binding MapHeight}"
+                           behaviors:PaintSurfaceBehavior.Command="{Binding PaintWaterSurfaceCommand}"
+                           behaviors:InvalidateBehavior.Trigger="{Binding}"
+                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                           IsHitTestVisible="False" />
+            <wpf:SKElement Width="{Binding MapWidth}"
+                           Height="{Binding MapHeight}"
+                           behaviors:PaintSurfaceBehavior.Command="{Binding PaintWorldSurfaceCommand}"
+                           behaviors:InvalidateBehavior.Trigger="{Binding}"
+                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                           IsHitTestVisible="False" />
+            <wpf:SKElement Width="{Binding MapWidth}"
+                           Height="{Binding MapHeight}"
+                           behaviors:PaintSurfaceBehavior.Command="{Binding PaintBordersSurfaceCommand}"
+                           behaviors:InvalidateBehavior.Trigger="{Binding}"
+                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                           IsHitTestVisible="False" />
+            <wpf:SKElement Width="{Binding MapWidth}"
+                           Height="{Binding MapHeight}"
+                           behaviors:PaintSurfaceBehavior.Command="{Binding PaintLabelsSurfaceCommand}"
+                           behaviors:InvalidateBehavior.Trigger="{Binding}"
+                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                           IsHitTestVisible="False" />
+        </Grid>
+    </ScrollViewer>
+</Window>

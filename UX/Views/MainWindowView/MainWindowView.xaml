@@ -10,7 +10,8 @@
         behaviors:LoadedBehavior.LoadedCommand="{Binding LoadedCommand}"
         Title="1941"
         WindowState="Maximized"
-        Background="{StaticResource PrimaryBrush}">
+        Background="{StaticResource PrimaryBrush}"
+        KeyDown="OnKeyDown">
     <DockPanel>
         <!-- <ContentControl DockPanel.Dock="Top" -->
         <!--                 Content="{Binding NavigationService.TopBar}" /> -->

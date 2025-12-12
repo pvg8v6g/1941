@@ -1,6 +1,10 @@
 ﻿using System.IO;
 using System.Text;
 using System.Windows;
+using System.Windows.Threading;
+using Library.Attributes;
+using Library.Enumerations;
+using Library.Extensions;
 using Library.Services;
 using Library.Utilities;
 using SkiaSharp;
@@ -52,7 +56,54 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
             if (field == value) return;
             field = value;
             OnPropertyChanged();
-            RebuildWorldColors(); // apply hover lightening
+
+            // Tooltip logic: restart delay when country changes; hide immediately if changed
+            OnHoveredClassChanged(value);
+        }
+    }
+
+    // Tooltip surface-bound coordinates (relative to MapGrid)
+    public double TooltipX
+    {
+        get;
+        private set
+        {
+            if (Math.Abs(field - value) < 0.1) return;
+            field = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public double TooltipY
+    {
+        get;
+        private set
+        {
+            if (Math.Abs(field - value) < 0.1) return;
+            field = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public string? TooltipText
+    {
+        get;
+        private set
+        {
+            if (field == value) return;
+            field = value;
+            OnPropertyChanged();
+        }
+    }
+
+    public bool TooltipIsOpen
+    {
+        get;
+        private set
+        {
+            if (field == value) return;
+            field = value;
+            OnPropertyChanged();
         }
     }
 
@@ -61,8 +112,6 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
     public RelayCommand<SKPaintSurfaceEventArgs> PaintWorldSurfaceCommand => new(PaintWorldSurface);
 
     public RelayCommand<SKPaintSurfaceEventArgs> PaintBordersSurfaceCommand => new(PaintBordersSurface);
-
-    public RelayCommand<SKPaintSurfaceEventArgs> PaintLabelsSurfaceCommand => new(PaintLabelsSurface);
 
     // Mouse interaction commands (for behaviors)
     public RelayCommand<Point> MouseMoveCommand => new(p => OnMouseMove(p.X, p.Y));
@@ -77,8 +126,9 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
 
     private SKSvg? _waterSvg;
     private SKSvg? _worldSvg;
+
     private SKSvg? _bordersSvg;
-    private SKSvg? _labelsSvg;
+
     private string? _worldSvgXmlOriginal;
     private string? _worldSvgXmlCurrent;
 
@@ -87,22 +137,15 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
     private readonly Dictionary<SKColor, string> _hitColorToClass = new();
     private readonly Dictionary<string, SKColor> _classToHitColor = new(StringComparer.OrdinalIgnoreCase);
 
-    // Ownership/colors
-    private readonly Dictionary<string, string> _classOwnership = new(StringComparer.OrdinalIgnoreCase); // class -> power
-
-    private readonly Dictionary<string, SKColor> _powerColors = new(StringComparer.OrdinalIgnoreCase)
-    {
-        // sensible defaults
-        { "russia", new SKColor(68, 114, 196) },
-        { "germany", new SKColor(192, 80, 77) },
-        { "britain", new SKColor(112, 173, 71) },
-        { "usa", new SKColor(91, 155, 213) },
-        { "japan", new SKColor(237, 125, 49) },
-        { "italy", new SKColor(165, 165, 165) },
-        { "neutral", new SKColor(230, 230, 230) }
-    };
-
     private const float DrawScale = 2.5f;
+
+    // Tooltip state
+    private readonly DispatcherTimer _hoverDelayTimer = new() { Interval = TimeSpan.FromMilliseconds(500) };
+    private readonly DispatcherTimer _tooltipCloseTimer = new() { Interval = TimeSpan.FromSeconds(5) };
+    private double _lastMouseX;
+    private double _lastMouseY;
+    private const double TooltipOffsetX = 12; // shift tooltip right to avoid cursor overlap
+    private const double TooltipOffsetY = 16; // shift tooltip down to avoid cursor overlap
 
     #endregion
 
@@ -116,9 +159,30 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         LoadWater(basePath);
         LoadWorld(basePath);
         LoadBorders(basePath);
-        LoadLabels(basePath);
         InvalidateRequested++;
         FactionColors();
+
+        // Wire timers
+        _hoverDelayTimer.Tick += (_, _) =>
+        {
+            _hoverDelayTimer.Stop();
+            if (string.IsNullOrWhiteSpace(HoveredClass)) return;
+            // Show tooltip where the pointer is at show time
+            // Find the matching territory by its SVG class key and display its attribute Name
+            var displayName = GetTerritoryNameFromClassKey(HoveredClass!);
+            TooltipText = displayName ?? HoveredClass?.Replace('_', ' ');
+            TooltipX = _lastMouseX + TooltipOffsetX;
+            TooltipY = _lastMouseY + TooltipOffsetY;
+            TooltipIsOpen = true;
+            _tooltipCloseTimer.Stop();
+            _tooltipCloseTimer.Start();
+        };
+
+        _tooltipCloseTimer.Tick += (_, _) =>
+        {
+            _tooltipCloseTimer.Stop();
+            TooltipIsOpen = false;
+        };
     }
 
     private void PaintWaterSurface(SKPaintSurfaceEventArgs e)
@@ -148,15 +212,6 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         canvas.DrawPicture(_bordersSvg.Picture);
     }
 
-    private void PaintLabelsSurface(SKPaintSurfaceEventArgs e)
-    {
-        var canvas = e.Surface.Canvas;
-        canvas.Clear(SKColors.Transparent);
-        if (_labelsSvg?.Picture is null) return;
-        canvas.Scale(DrawScale);
-        canvas.DrawPicture(_labelsSvg.Picture);
-    }
-
     /// <summary>
     /// Updates the fill color of all shapes that have the given class in world.svg by injecting/updating
     /// a CSS rule in the SVG and reloading the picture. Triggers invalidate on success.
@@ -175,21 +230,11 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         InvalidateRequested++;
     }
 
-    public void SetPowerColor(string power, SKColor color)
-    {
-        _powerColors[power] = color;
-        RebuildWorldColors();
-    }
-
-    public void AssignTerritory(string className, string power)
-    {
-        _classOwnership[className] = power;
-        RebuildWorldColors();
-    }
-
     private void OnMouseMove(double x, double y)
     {
         if (_hitmapBitmap is null) return;
+        _lastMouseX = x;
+        _lastMouseY = y;
         var px = (int) Math.Clamp(x, 0, _hitmapBitmap.Width - 1);
         var py = (int) Math.Clamp(y, 0, _hitmapBitmap.Height - 1);
         var color = _hitmapBitmap.GetPixel(px, py);
@@ -249,27 +294,22 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         HoveredClass = null;
     }
 
-    private void RebuildWorldColors()
+    private void OnHoveredClassChanged(string? newClass)
     {
-        if (string.IsNullOrWhiteSpace(_worldSvgXmlOriginal)) return;
+        // If country changed, hide tooltip immediately and reset timers
+        _tooltipCloseTimer.Stop();
+        TooltipIsOpen = false;
 
-        // Build fills dictionary per class ownership; default neutral
-        var allClasses = _classToHitColor.Keys.Count > 0 ? _classToHitColor.Keys.AsEnumerable() : SvgClassColorService.ExtractClasses(_worldSvgXmlOriginal!);
-
-        var fills = new Dictionary<string, SKColor>(StringComparer.OrdinalIgnoreCase);
-        foreach (var cls in allClasses)
+        _hoverDelayTimer.Stop();
+        if (!string.IsNullOrWhiteSpace(newClass))
         {
-            var power = _classOwnership.GetValueOrDefault(cls, "neutral");
-            var color = _powerColors.TryGetValue(power, out var c) ? c : _powerColors["neutral"];
-            fills[cls] = color;
+            // Start waiting to show tooltip for this country
+            _hoverDelayTimer.Start();
         }
-
-        var updated = SvgClassColorService.ApplyClassFills(_worldSvgXmlOriginal!, fills, HoveredClass);
-        _worldSvgXmlCurrent = updated;
-        _worldSvg ??= new SKSvg();
-        using var ms = new MemoryStream(Encoding.UTF8.GetBytes(_worldSvgXmlCurrent));
-        _worldSvg.Load(ms);
-        InvalidateRequested++;
+        else
+        {
+            TooltipText = null;
+        }
     }
 
     private void BuildHitmap()
@@ -324,7 +364,7 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         _waterSvg.Load(Path.Combine(basePath, "Graphics", "Images", "world_water.svg"));
 
         if (_waterSvg?.Picture is null) return;
-        var scale = 2.5d;
+        const double scale = 2.5d;
         MapWidth = _waterSvg.Picture.CullRect.Width * scale;
         MapHeight = _waterSvg.Picture.CullRect.Height * scale;
     }
@@ -348,15 +388,81 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         _bordersSvg.Load(Path.Combine(basePath, "Graphics", "Images", "world_borders.svg"));
     }
 
-    private void LoadLabels(string basePath)
-    {
-        _labelsSvg = new SKSvg();
-        _labelsSvg.Load(Path.Combine(basePath, "Graphics", "Images", "labels.svg"));
-    }
-
     private void FactionColors()
     {
-        
+        if (string.IsNullOrWhiteSpace(_worldSvgXmlOriginal)) return;
+
+        // Build map of normalized SVG class key -> SKColor based on each territory's starting faction color
+        var fills = new Dictionary<string, SKColor>(StringComparer.OrdinalIgnoreCase);
+        foreach (var territory in Enum.GetValues<Territories>())
+        {
+            var info = territory.GetAttribute<TerritoryInfo>();
+            var factionColorHex = info.StartingFaction.GetAttribute<FactionColor>()
+                .Color;
+            if (string.IsNullOrWhiteSpace(info.Key)) continue;
+            if (string.IsNullOrWhiteSpace(factionColorHex)) continue;
+
+            if (!TryParseHexColor(factionColorHex, out var color)) continue;
+            // Keys in TerritoryInfo are already normalized to underscore-separated which matches SvgClassColorService expectations
+            fills[info.Key] = color;
+        }
+
+        if (fills.Count == 0) return;
+
+        // Apply fills to original world SVG and reload
+        var updated = SvgClassColorService.ApplyClassFills(_worldSvgXmlOriginal!, fills);
+        _worldSvgXmlCurrent = updated;
+        _worldSvg ??= new SKSvg();
+        using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(_worldSvgXmlCurrent)))
+        {
+            _worldSvg.Load(ms);
+        }
+
+        InvalidateRequested++;
+    }
+
+    private static bool TryParseHexColor(string hex, out SKColor color)
+    {
+        color = SKColors.Transparent;
+        if (hex.IsNullOrWhiteSpace()) return false;
+        var s = hex.Trim();
+        if (s.StartsWith('#')) s = s[1..];
+        if (s.StartsWith("0x", StringComparison.OrdinalIgnoreCase)) s = s[2..];
+
+        switch (s.Length)
+        {
+            // Support RRGGBB and AARRGGBB
+            case 6:
+            {
+                if (!byte.TryParse(s[..2], System.Globalization.NumberStyles.HexNumber, null, out var r) ||
+                    !byte.TryParse(s.AsSpan(2, 2), System.Globalization.NumberStyles.HexNumber, null, out var g) ||
+                    !byte.TryParse(s.AsSpan(4, 2), System.Globalization.NumberStyles.HexNumber, null, out var b)) return false;
+                color = new SKColor(r, g, b, 255);
+                return true;
+            }
+            case 8:
+            {
+                if (!byte.TryParse(s[..2], System.Globalization.NumberStyles.HexNumber, null, out var a) ||
+                    !byte.TryParse(s.AsSpan(2, 2), System.Globalization.NumberStyles.HexNumber, null, out var r) ||
+                    !byte.TryParse(s.AsSpan(4, 2), System.Globalization.NumberStyles.HexNumber, null, out var g) ||
+                    !byte.TryParse(s.AsSpan(6, 2), System.Globalization.NumberStyles.HexNumber, null, out var b)) return false;
+                color = new SKColor(r, g, b, a);
+                return true;
+            }
+            default:
+                return false;
+        }
+    }
+
+    private static string? GetTerritoryNameFromClassKey(string classKey)
+    {
+        if (string.IsNullOrWhiteSpace(classKey)) return null;
+        return Enum.GetValues<Territories>()
+            .Select(territory => territory.GetAttribute<TerritoryInfo>())
+            .Where(info => !info.Key.IsNullOrWhiteSpace())
+            .Where(info => string.Equals(info.Key, classKey, StringComparison.OrdinalIgnoreCase))
+            .Select(info => info.Name.IsNullOrWhiteSpace() ? info.Key.Replace('_', ' ') : info.Name)
+            .FirstOrDefault();
     }
 
     #endregion

@@ -6,17 +6,38 @@ namespace Library.Services;
 
 public class SvgClassColorService : ISvgClassColorService
 {
-    // Matches a CSS rule for a class like .xx { ... }
-    private static Regex BuildClassRuleRegex(string className)
+    // Matches a CSS rule for a selector like .A.B { ... } (class chain without spaces)
+    private static Regex BuildClassRuleRegex(string selectorWithoutDot)
     {
-        var escaped = Regex.Escape(className);
+        var escaped = Regex.Escape(selectorWithoutDot);
         return new Regex($@"\.{escaped}\s*\{{[^}}]*\}}", RegexOptions.Singleline | RegexOptions.IgnoreCase);
+    }
+
+    // Normalize a raw SVG class attribute value to a single key, replacing whitespace with underscores
+    private static string NormalizeClassToKey(string rawClassAttribute)
+    {
+        if (string.IsNullOrWhiteSpace(rawClassAttribute)) return string.Empty;
+        // collapse all whitespace to single spaces, trim, then replace spaces with underscores
+        var collapsed = Regex.Replace(rawClassAttribute.Trim(), @"\s+", " ");
+        return collapsed.Replace(' ', '_');
+    }
+
+    // Convert normalized key back to a CSS selector targeting all original classes: United_Kingdom -> "United.Kingdom"
+    private static string KeyToSelector(string key)
+    {
+        if (string.IsNullOrWhiteSpace(key)) return string.Empty;
+        var parts = key.Split('_', StringSplitOptions.RemoveEmptyEntries);
+        return string.Join('.', parts);
     }
 
     public string UpsertClassFill(string svgXml, string className, SKColor color)
     {
         if (string.IsNullOrWhiteSpace(svgXml) || string.IsNullOrWhiteSpace(className))
             return svgXml;
+
+        // Treat incoming className as normalized key; build multi-class selector
+        var selectorNoDot = KeyToSelector(className);
+        var selectorWithDot = "." + selectorNoDot;
 
         var styleStartIndex = svgXml.IndexOf("<style", StringComparison.OrdinalIgnoreCase);
         // Ensure a <style> element exists as a direct child of <svg>
@@ -49,7 +70,7 @@ public class SvgClassColorService : ISvgClassColorService
 
         // Build the desired rule text
         var hex = ColorToCss(color);
-        var desiredRule = $".{className}{{ fill: {hex} !important; }}";
+        var desiredRule = $"{selectorWithDot}{{ fill: {hex} !important; }}";
 
         // Find the end of the first style block's content (we will work inside CDATA if present)
         // Prefer editing inside <![CDATA[ ... ]]>
@@ -60,7 +81,7 @@ public class SvgClassColorService : ISvgClassColorService
             var contentStart = cdataStart + "<![CDATA[".Length;
             var length = cdataEnd - contentStart;
             var css = svgXml.Substring(contentStart, length);
-            var updatedCss = UpsertCssRule(css, className, desiredRule);
+            var updatedCss = UpsertCssRule(css, selectorNoDot, desiredRule);
             var sb = new StringBuilder(svgXml);
             sb.Remove(contentStart, length);
             sb.Insert(contentStart, updatedCss);
@@ -76,7 +97,7 @@ public class SvgClassColorService : ISvgClassColorService
                 if (openEnd > styleStartIndex)
                 {
                     var css = svgXml.Substring(openEnd + 1, styleClose - (openEnd + 1));
-                    var updatedCss = UpsertCssRule(css, className, desiredRule);
+                    var updatedCss = UpsertCssRule(css, selectorNoDot, desiredRule);
                     var sb = new StringBuilder(svgXml);
                     sb.Remove(openEnd + 1, css.Length);
                     sb.Insert(openEnd + 1, updatedCss);
@@ -93,16 +114,13 @@ public class SvgClassColorService : ISvgClassColorService
         var set = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         if (string.IsNullOrWhiteSpace(svgXml)) return set;
 
-        // Find class attributes and split by whitespace
+        // Find class attributes; treat the entire value as a logical key (multi-word classes combined)
         var rx = new Regex("class\\s*=\\s*\"([^\"]*)\"", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         foreach (Match m in rx.Matches(svgXml))
         {
             var content = m.Groups[1].Value;
-            foreach (var token in content.Split(new[] { ' ', '\n', '\r', '\t' }, StringSplitOptions.RemoveEmptyEntries))
-            {
-                // ignore common non-country classes if any
-                set.Add(token.Trim('.'));
-            }
+            var key = NormalizeClassToKey(content);
+            if (!string.IsNullOrWhiteSpace(key)) set.Add(key);
         }
         return set;
     }
@@ -122,7 +140,8 @@ public class SvgClassColorService : ISvgClassColorService
                 c = Lighten(c, hoverLighten);
             }
             var hex = ColorToCss(c);
-            sbCss.Append('.').Append(kvp.Key).Append("{ fill: ").Append(hex).Append(" !important; stroke: none !important; }")
+            var selector = KeyToSelector(kvp.Key);
+            sbCss.Append('.').Append(selector).Append("{ fill: ").Append(hex).Append(" !important; stroke: none !important; }")
                 .Append('\n');
         }
 
