@@ -22,10 +22,23 @@ public enum Territories
     [TerritoryInfo("China", "China", Faction.China)]
     China,
 
-    [TerritoryInfo("South Korea", "South Korea", Faction.Japan)]
+    // New East Asia splits inside historical China for 1941 scenario
+    // These classes must match paths in Graphics/Images/world.svg
+    [TerritoryInfo("Taiwan", "Taiwan", Faction.Japan)]
+    Taiwan,
+
+    // New East Asia splits inside historical China for 1941 scenario
+    // These classes must match paths in Graphics/Images/world.svg
+    [TerritoryInfo("Manchukuo", "Manchukuo", Faction.Japan)]
+    Manchukuo,
+
+    [TerritoryInfo("Taierzhuang", "Taierzhuang", Faction.Japan)]
+    Taierzhuang,
+
+    [TerritoryInfo("South_Korea", "South Korea", Faction.Japan)]
     SouthKorea,
 
-    [TerritoryInfo("North Korea", "North Korea", Faction.Japan)]
+    [TerritoryInfo("North_Korea", "North Korea", Faction.Japan)]
     NorthKorea,
 
     [TerritoryInfo("Formosa", "Formosa", Faction.Japan)]
