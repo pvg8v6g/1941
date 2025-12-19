@@ -7,7 +7,7 @@ public enum Territories
     [TerritoryInfo("Afghanistan", "Afghanistan", Faction.Neutral)]
     Afghanistan,
 
-    [TerritoryInfo("India", "British India", Faction.UnitedKingdom)]
+    [TerritoryInfo("India", "India", Faction.UnitedKingdom)]
     India,
 
     [TerritoryInfo("Pakistan", "Pakistan", Faction.UnitedKingdom)]
@@ -25,11 +25,14 @@ public enum Territories
     [TerritoryInfo("Bhutan", "Bhutan", Faction.UnitedKingdom)]
     Bhutan,
 
-    [TerritoryInfo("Sri Lanka", "Ceylon", Faction.UnitedKingdom)]
+    [TerritoryInfo("Sri_Lanka", "Ceylon", Faction.UnitedKingdom)]
     SriLanka,
 
     [TerritoryInfo("China", "China", Faction.China)]
     China,
+
+    [TerritoryInfo("Brunei_Darussalam", "Brunei Darussalam", Faction.UnitedKingdom)]
+    BruneiDarussalam,
 
     // New East Asia splits inside historical China for 1941 scenario
     // These classes must match paths in Graphics/Images/world.svg
@@ -65,7 +68,7 @@ public enum Territories
     [TerritoryInfo("Cambodia", "Cambodia", Faction.Japan)]
     Cambodia,
 
-    [TerritoryInfo("Lao PDR", "Laos", Faction.Japan)]
+    [TerritoryInfo("Lao_PDR", "Laos", Faction.Japan)]
     Laos,
 
     [TerritoryInfo("French_Indochina", "French Indochina", Faction.Japan)]
@@ -148,7 +151,7 @@ public enum Territories
     [TerritoryInfo("Slovenia", "Slovenia", Faction.Germany)]
     Slovenia,
 
-    [TerritoryInfo("United Kingdom", "United Kingdom", Faction.UnitedKingdom)]
+    [TerritoryInfo("United_Kingdom", "United Kingdom", Faction.UnitedKingdom)]
     UnitedKingdom,
 
     [TerritoryInfo("Ireland", "Ireland", Faction.Neutral)]
@@ -284,7 +287,7 @@ public enum Territories
     [TerritoryInfo("Qatar", "Qatar", Faction.UnitedKingdom)]
     Qatar,
 
-    [TerritoryInfo("United Arab Emirates", "Trucial States", Faction.UnitedKingdom)]
+    [TerritoryInfo("United_Arab_Emirates", "Trucial States", Faction.UnitedKingdom)]
     UnitedArabEmirates,
 
     [TerritoryInfo("Oman", "Oman", Faction.UnitedKingdom)]
@@ -293,7 +296,7 @@ public enum Territories
     [TerritoryInfo("Yemen", "Yemen", Faction.Neutral)]
     Yemen,
 
-    [TerritoryInfo("Saudi Arabia", "Saudi Arabia", Faction.Neutral)]
+    [TerritoryInfo("Saudi_Arabia", "Saudi Arabia", Faction.Neutral)]
     SaudiArabia,
 
     #endregion
@@ -402,7 +405,7 @@ public enum Territories
     [TerritoryInfo("Nigeria", "Nigeria", Faction.UnitedKingdom)]
     Nigeria,
 
-    [TerritoryInfo("Central African Republic", "Central African Republic", Faction.UnitedKingdom)]
+    [TerritoryInfo("Central_African_Republic", "Central African Republic", Faction.UnitedKingdom)]
     CentralAfricanRepublic,
 
     [TerritoryInfo("Cameroon", "Cameroon", Faction.UnitedKingdom)]
@@ -414,10 +417,10 @@ public enum Territories
     [TerritoryInfo("Gabon", "Gabon", Faction.UnitedKingdom)]
     Gabon,
 
-    [TerritoryInfo("Republic of Congo", "Republic of Congo", Faction.UnitedKingdom)]
+    [TerritoryInfo("Republic_of_Congo", "Republic of Congo", Faction.UnitedKingdom)]
     RepublicOfCongo,
 
-    [TerritoryInfo("Democratic Republic of the Congo", "Belgian Congo", Faction.UnitedKingdom)]
+    [TerritoryInfo("Democratic_Republic_of_the_Congo", "Belgian Congo", Faction.UnitedKingdom)]
     DemocraticRepublicOfTheCongo,
 
     [TerritoryInfo("Angola", "Angola", Faction.UnitedKingdom)]
@@ -457,7 +460,7 @@ public enum Territories
 
     #region Russian Federation
 
-    [TerritoryInfo("Soviet Union", "Soviet Union", Faction.Russia)]
+    [TerritoryInfo("Soviet_Union", "Soviet Union", Faction.Russia)]
     SovietUnion,
 
     [TerritoryInfo("Kazakhstan", "Kazakh SSR", Faction.Russia)]
