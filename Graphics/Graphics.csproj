@@ -21,10 +21,6 @@
         <Content Include="Images\world_water.svg">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
-        <None Remove="Images\labels.svg"/>
-        <Content Include="Images\labels.svg">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
     </ItemGroup>
 
 </Project>
