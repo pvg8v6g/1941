@@ -10,15 +10,19 @@
 
     <ItemGroup>
         <None Remove="Images\world.svg"/>
-        <None Remove="Images\world_borders.svg"/>
         <Content Include="Images\world.svg">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
+        <None Remove="Images\world_borders.svg"/>
         <Content Include="Images\world_borders.svg">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
         <None Remove="Images\world_water.svg"/>
         <Content Include="Images\world_water.svg">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </Content>
+        <None Remove="Images\symbols.svg"/>
+        <Content Include="Images\symbols.svg">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </Content>
     </ItemGroup>
