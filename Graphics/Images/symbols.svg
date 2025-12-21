@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <svg xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink"
      fill="#ececec"
@@ -14,7 +14,7 @@
       <rect x="0" y="0" width="2000" height="857"/>
     </clipPath>
   </defs>
-  <g id="symbol-soviet-union" transform="translate(730, 100) scale(0.2, 0.2)">
+  <g id="symbol-soviet-union" transform="translate(715, 121) scale(0.2, 0.2)">
     <defs>
       <clipPath id="sovietClip">
         <circle r="80"
@@ -54,7 +54,7 @@
       </g>
     </g>
   </g>
-  <g id="symbol-germany" transform="translate(550, 98) scale(0.68, 0.68)">
+  <g id="symbol-germany" transform="translate(578, 152) scale(0.68, 0.68)">
     <defs>
       <clipPath id="germanyClip">
         <circle r="25"
@@ -81,12 +81,12 @@
             stroke-width="2"/>
     </g>
   </g>
-  <g id="symbol-united-kingom" transform="translate(500, 155) scale(0.065, 0.065)">
+  <g id="symbol-united-kingdom" transform="translate(515, 129) scale(0.065, 0.065)">
     <circle cx="301" cy="301" r="300" fill="#00224b"/>
     <circle cx="301" cy="301" r="180" fill="#ffffff"/>
     <circle cx="301" cy="301" r="60" fill="#8b2f08"/>
   </g>
-  <g id="symbol-japan" transform="translate(476.6, 200) scale(0.195, 0.195)">
+  <g id="symbol-japan" transform="translate(1291.6, 227) scale(0.195, 0.195)">
     <defs>
       <defs>
         <clipPath id="japanClip">
@@ -145,7 +145,7 @@
       </g>
     </g>
   </g>
-  <g id="symbol-united-states" transform="translate(465.8, 326.5) scale(0.0195, 0.0195)">
+  <g id="symbol-united-states" transform="translate(28.8, 240.5) scale(0.0195, 0.0195)">
     <defs>
       <clipPath id="unitesStatesClip">
         <circle r="1000"
