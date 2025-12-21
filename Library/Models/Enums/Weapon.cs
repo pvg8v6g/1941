@@ -4,7 +4,6 @@ namespace Library.Models.Enums;
 
 public enum Weapon
 {
-
     Rifle,
     Fire,
     RPG,
@@ -16,5 +15,4 @@ public enum Weapon
     Flak,
     Turret,
     Battery
-
 }

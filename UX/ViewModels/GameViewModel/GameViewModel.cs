@@ -113,6 +113,8 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
 
     public RelayCommand<SKPaintSurfaceEventArgs> PaintBordersSurfaceCommand => new(PaintBordersSurface);
 
+    public RelayCommand<SKPaintSurfaceEventArgs> PaintSymbolsSurfaceCommand => new(PaintSymbolsSurface);
+
     // Mouse interaction commands (for behaviors)
     public RelayCommand<Point> MouseMoveCommand => new(p => OnMouseMove(p.X, p.Y));
 
@@ -128,6 +130,7 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
     private SKSvg? _worldSvg;
 
     private SKSvg? _bordersSvg;
+    private SKSvg? _symbolsSvg;
 
     private string? _worldSvgXmlOriginal;
     private string? _worldSvgXmlCurrent;
@@ -159,6 +162,7 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         LoadWater(basePath);
         LoadWorld(basePath);
         LoadBorders(basePath);
+        LoadSymbols(basePath);
         InvalidateRequested++;
         FactionColors();
 
@@ -210,6 +214,15 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
         if (_bordersSvg?.Picture is null) return;
         canvas.Scale(DrawScale);
         canvas.DrawPicture(_bordersSvg.Picture);
+    }
+
+    private void PaintSymbolsSurface(SKPaintSurfaceEventArgs e)
+    {
+        var canvas = e.Surface.Canvas;
+        canvas.Clear(SKColors.Transparent);
+        if (_symbolsSvg?.Picture is null) return;
+        canvas.Scale(DrawScale);
+        canvas.DrawPicture(_symbolsSvg.Picture);
     }
 
     /// <summary>
@@ -345,6 +358,12 @@ public class GameViewModel(ISvgClassColorService svgClassColorService) : BaseVie
     {
         _bordersSvg = new SKSvg();
         _bordersSvg.Load(Path.Combine(basePath, "Graphics", "Images", "world_borders.svg"));
+    }
+
+    private void LoadSymbols(string basePath)
+    {
+        _symbolsSvg = new SKSvg();
+        _symbolsSvg.Load(Path.Combine(basePath, "Graphics", "Images", "symbols.svg"));
     }
 
     private void FactionColors()

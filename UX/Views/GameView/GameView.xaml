@@ -10,64 +10,64 @@
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance gameViewModel:GameViewModel}"
              behaviors:LoadedBehavior.LoadedCommand="{Binding LoadedCommand}">
-    <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                  VerticalScrollBarVisibility="Auto"
-                  PanningMode="None"
-                  CanContentScroll="False"
-                  ClipToBounds="True"
-                  Background="Transparent">
-        <i:Interaction.Behaviors>
-            <behaviors:PanZoomScrollBehavior
-                TargetElement="{Binding ElementName=MapGrid}"
-                EdgeHideMargin="0,0,0,0"
-                MinScale="0.2"
-                MaxScale="8"
-                WheelZoomFactor="1.15" />
-        </i:Interaction.Behaviors>
-        <Grid x:Name="MapGrid"
-              Width="{Binding MapWidth}"
-              Height="{Binding MapHeight}"
-              Background="Transparent">
-            <!-- LayoutTransform for zoom is applied by PanZoomScrollBehavior; do not use RenderTransform for pan/zoom -->
-            <wpf:SKElement Width="{Binding MapWidth}"
-                           Height="{Binding MapHeight}"
-                           behaviors:PaintSurfaceBehavior.Command="{Binding PaintWaterSurfaceCommand}"
-                           behaviors:InvalidateBehavior.Trigger="{Binding}"
-                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
-                           IsHitTestVisible="False" />
-            <wpf:SKElement Width="{Binding MapWidth}"
-                           Height="{Binding MapHeight}"
-                           behaviors:PaintSurfaceBehavior.Command="{Binding PaintWorldSurfaceCommand}"
-                           behaviors:InvalidateBehavior.Trigger="{Binding}"
-                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
-                           IsHitTestVisible="True"
-                           behaviors:MouseMoveBehavior.Command="{Binding MouseMoveCommand}"
-                           behaviors:MouseLeaveBehavior.Command="{Binding MouseLeaveCommand}" />
-            <wpf:SKElement Width="{Binding MapWidth}"
-                           Height="{Binding MapHeight}"
-                           behaviors:PaintSurfaceBehavior.Command="{Binding PaintBordersSurfaceCommand}"
-                           behaviors:InvalidateBehavior.Trigger="{Binding}"
-                           behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
-                           IsHitTestVisible="False" />
-            <!-- <wpf:SKElement Width="{Binding MapWidth}" -->
-            <!--                Height="{Binding MapHeight}" -->
-            <!--                behaviors:PaintSurfaceBehavior.Command="{Binding PaintLabelsSurfaceCommand}" -->
-            <!--                behaviors:InvalidateBehavior.Trigger="{Binding}" -->
-            <!--                behaviors:InvalidateBehavior.PropertyName="InvalidateRequested" -->
-            <!--                IsHitTestVisible="False" /> -->
-            <!-- Delayed tooltip that shows HoveredClass after ~4s and stays ~5s or until hover changes -->
-            <Popup IsOpen="{Binding TooltipIsOpen, Mode=OneWay}"
-                   PlacementTarget="{Binding ElementName=MapGrid}"
-                   Placement="Relative"
-                   HorizontalOffset="{Binding TooltipX}"
-                   VerticalOffset="{Binding TooltipY}"
-                   AllowsTransparency="True"
-                   StaysOpen="True"
-                   Focusable="False">
-                <Border Background="#CC1E1E1E" Padding="12" CornerRadius="4" BorderBrush="#AAFFFFFF" BorderThickness="1">
-                    <TextBlock Text="{Binding TooltipText}" Foreground="White" FontSize="16" FontWeight="SemiBold" />
-                </Border>
-            </Popup>
-        </Grid>
-    </ScrollViewer>
+  <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto"
+                PanningMode="None"
+                CanContentScroll="False"
+                ClipToBounds="True"
+                Background="Transparent">
+    <i:Interaction.Behaviors>
+      <behaviors:PanZoomScrollBehavior
+        TargetElement="{Binding ElementName=MapGrid}"
+        EdgeHideMargin="0,0,0,0"
+        MinScale="0.2"
+        MaxScale="8"
+        WheelZoomFactor="1.15" />
+    </i:Interaction.Behaviors>
+    <Grid x:Name="MapGrid"
+          Width="{Binding MapWidth}"
+          Height="{Binding MapHeight}"
+          Background="Transparent">
+      <!-- LayoutTransform for zoom is applied by PanZoomScrollBehavior; do not use RenderTransform for pan/zoom -->
+      <wpf:SKElement Width="{Binding MapWidth}"
+                     Height="{Binding MapHeight}"
+                     behaviors:PaintSurfaceBehavior.Command="{Binding PaintWaterSurfaceCommand}"
+                     behaviors:InvalidateBehavior.Trigger="{Binding}"
+                     behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                     IsHitTestVisible="False" />
+      <wpf:SKElement Width="{Binding MapWidth}"
+                     Height="{Binding MapHeight}"
+                     behaviors:PaintSurfaceBehavior.Command="{Binding PaintWorldSurfaceCommand}"
+                     behaviors:InvalidateBehavior.Trigger="{Binding}"
+                     behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                     IsHitTestVisible="True"
+                     behaviors:MouseMoveBehavior.Command="{Binding MouseMoveCommand}"
+                     behaviors:MouseLeaveBehavior.Command="{Binding MouseLeaveCommand}" />
+      <wpf:SKElement Width="{Binding MapWidth}"
+                     Height="{Binding MapHeight}"
+                     behaviors:PaintSurfaceBehavior.Command="{Binding PaintBordersSurfaceCommand}"
+                     behaviors:InvalidateBehavior.Trigger="{Binding}"
+                     behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                     IsHitTestVisible="False" />
+      <wpf:SKElement Width="{Binding MapWidth}"
+                     Height="{Binding MapHeight}"
+                     behaviors:PaintSurfaceBehavior.Command="{Binding PaintSymbolsSurfaceCommand}"
+                     behaviors:InvalidateBehavior.Trigger="{Binding}"
+                     behaviors:InvalidateBehavior.PropertyName="InvalidateRequested"
+                     IsHitTestVisible="False" />
+      <!-- Delayed tooltip that shows HoveredClass after ~4s and stays ~5s or until hover changes -->
+      <Popup IsOpen="{Binding TooltipIsOpen, Mode=OneWay}"
+             PlacementTarget="{Binding ElementName=MapGrid}"
+             Placement="Relative"
+             HorizontalOffset="{Binding TooltipX}"
+             VerticalOffset="{Binding TooltipY}"
+             AllowsTransparency="True"
+             StaysOpen="True"
+             Focusable="False">
+        <Border Background="#CC1E1E1E" Padding="12" CornerRadius="4" BorderBrush="#AAFFFFFF" BorderThickness="1">
+          <TextBlock Text="{Binding TooltipText}" Foreground="White" FontSize="16" FontWeight="SemiBold" />
+        </Border>
+      </Popup>
+    </Grid>
+  </ScrollViewer>
 </UserControl>
